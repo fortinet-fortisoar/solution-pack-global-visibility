@@ -1,0 +1,152 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Get Tenant Data",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "tenantData",
+        "siteName"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/09e854ab-ec45-4705-8eeb-5d498c3bc5cc",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/79087136-6cb4-4da3-8c9d-da53de0a6e9f",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "All Open Alerts and Incidents",
+            "description": null,
+            "arguments": {
+                "alertsCount": "{% set tenantData = {} %}{% set _ = tenantData.update({vars.input.params.tenantData.name : vars.steps.Tenants.data['hydra:totalItems']  }) %}\n{{tenantData}}",
+                "incidentCount": "{% set data = {} %}{% set _ = data.update({vars.input.params.tenantData.name : vars.steps.Open_Incidents.data['hydra:totalItems']  }) %}\n{{data}}"
+            },
+            "status": null,
+            "top": "30",
+            "left": "1100",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "fe7f26ed-d53a-4e42-9a9d-4f22596dc8cc"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Open Incidents",
+            "description": null,
+            "arguments": {
+                "name": "Remote FortiSOAR",
+                "config": "{{vars.input.params.siteName}}",
+                "params": {
+                    "iri": "\/api\/query\/incidents",
+                    "body": "{\n    \"__selectFields\": [\n        \"id\"\n    ],\n    \"filters\": [\n        {\n            \"field\": \"tenant\",\n            \"operator\": \"eq\",\n            \"type\": \"object\",\n            \"value\": \"{{vars.input.params.tenantData.uuid}}\"\n        },\n        {\n            \"display\": \"\",\n            \"field\": \"status\",\n            \"operator\": \"in\",\n            \"OPERATOR_KEY\": \"$\",\n            \"type\": \"array\",\n            \"value\": [\n                \"\/api\/3\/picklists\/bb73fe9e-f699-11e7-8c3f-9a214cf093ae\"\n            ]\n        },\n        {\n            \"filters\": [\n            ],\n            \"limit\": 30,\n            \"logic\": \"AND\",\n            \"sort\": [\n            ]\n        }\n    ],\n    \"limit\": 30,\n    \"logic\": \"AND\",\n    \"sort\": [\n        {\n            \"direction\": \"DESC\",\n            \"field\": \"modifyDate\"\n        }\n    ]\n}",
+                    "method": "POST",
+                    "params": "",
+                    "headers": "{\"accept\": \"application\/json\"}"
+                },
+                "version": "1.0.0",
+                "connector": "remote-fortisoar",
+                "operation": "make_api_call",
+                "operationTitle": "Make an API call",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "30",
+            "left": "775",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "ef466cc3-d63c-4c4c-a8a6-55fbf70cbacb"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "79087136-6cb4-4da3-8c9d-da53de0a6e9f"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Tenants",
+            "description": null,
+            "arguments": {
+                "name": "Remote FortiSOAR",
+                "config": "{{vars.input.params.siteName}}",
+                "params": {
+                    "iri": "\/api\/query\/alerts",
+                    "body": "{\n    \"sort\": [\n        {\n            \"field\": \"priorityWeight\",\n            \"direction\": \"DESC\",\n            \"_fieldName\": \"priorityWeight\"\n        }\n    ],\n    \"limit\": 30,\n    \"logic\": \"AND\",\n    \"filters\": [\n        {\n            \"field\": \"tenant\",\n            \"operator\": \"eq\",\n            \"value\": \"{{vars.input.params.tenantData.uuid}}\",\n            \"type\": \"object\"\n        },\n        {\n            \"sort\": [\n                {\n                    \"direction\": \"DESC\",\n                    \"field\": \"priorityWeight\",\n                    \"_fieldTitle\": \"Priority Weight\",\n                    \"_fieldName\": \"priorityWeight\"\n                }\n            ],\n            \"limit\": 30,\n            \"logic\": \"AND\",\n            \"filters\": []\n        }\n    ],\n    \"__selectFields\": [\n        \"id\"\n    ]\n}",
+                    "method": "POST",
+                    "params": "",
+                    "headers": "{\"accept\": \"application\/json\"}"
+                },
+                "version": "1.0.0",
+                "connector": "remote-fortisoar",
+                "operation": "make_api_call",
+                "operationTitle": "Make an API call",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "30",
+            "left": "450",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "8c158b8a-9880-4ee0-acba-ba3cbe699003"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Open Incidents -> All Open Alerts",
+            "targetStep": "\/api\/3\/workflow_steps\/fe7f26ed-d53a-4e42-9a9d-4f22596dc8cc",
+            "sourceStep": "\/api\/3\/workflow_steps\/ef466cc3-d63c-4c4c-a8a6-55fbf70cbacb",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f37a56ec-b832-4639-944b-761f7119f19e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Tenants",
+            "targetStep": "\/api\/3\/workflow_steps\/8c158b8a-9880-4ee0-acba-ba3cbe699003",
+            "sourceStep": "\/api\/3\/workflow_steps\/79087136-6cb4-4da3-8c9d-da53de0a6e9f",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "cecaf249-c2ce-4be5-a0a4-93fc41f8c939"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Tenants -> Open Indicators",
+            "targetStep": "\/api\/3\/workflow_steps\/ef466cc3-d63c-4c4c-a8a6-55fbf70cbacb",
+            "sourceStep": "\/api\/3\/workflow_steps\/8c158b8a-9880-4ee0-acba-ba3cbe699003",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "c1527550-c587-498c-b754-6c809f745e5c"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "23a1143c-a41e-40f3-ac01-34023b347ad5",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "global_visibility"
+    ]
+}

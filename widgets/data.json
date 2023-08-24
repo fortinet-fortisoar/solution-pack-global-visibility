@@ -1,0 +1,28 @@
+[
+    {
+        "name": "funnelChart",
+        "title": "Funnel Chart",
+        "install_mode": "rpm"
+    },
+    
+    {
+        "name": "globalVisibilityConfiguration",
+        "title": "Global Visibility Configuration",
+        "install_mode": "rpm"
+    },
+    {
+        "name": "topX",
+        "title": "Top X",
+        "install_mode": "rpm"
+    },
+    {
+        "name": "recordSummaryTile",
+        "title": "Record Summary Tile",
+        "install_mode": "rpm"
+    },
+    {
+        "name": "recordSummaryCard",
+        "title": "Record Summary Card",
+        "install_mode": "rpm"
+    }
+]

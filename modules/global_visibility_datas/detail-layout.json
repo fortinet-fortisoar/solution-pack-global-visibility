@@ -1,0 +1,96 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "editableFormGroup",
+                                "config": {
+                                    "wid": "4ee508e0-f5b2-4a3b-80ae-849bd3a58849",
+                                    "rows": [
+                                        {
+                                            "columns": [
+                                                {
+                                                    "fields": [
+                                                        {
+                                                            "name": "dashboardData",
+                                                            "highlightMode": true,
+                                                            "linky": true,
+                                                            "readOnly": false,
+                                                            "renderWidgetHeight": 500
+                                                        },
+                                                        {
+                                                            "name": "siteName",
+                                                            "highlightMode": true,
+                                                            "linky": true,
+                                                            "readOnly": false
+                                                        },
+                                                        {
+                                                            "name": "siteType",
+                                                            "highlightMode": true,
+                                                            "linky": true,
+                                                            "readOnly": false
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "3884be22-f362-4fee-aed4-26fb9b4ec658",
+                "_collapsed": false
+            },
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "tabs",
+                                "config": {
+                                    "tabs": [
+                                        {
+                                            "title": "Related Records",
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "excludes": [
+                                                        "notes",
+                                                        "comments",
+                                                        "userOwners",
+                                                        "attachments"
+                                                    ],
+                                                    "wid": "296957d0-6ac1-460c-b4a4-94e6978004a1"
+                                                }
+                                            },
+                                            "show": true,
+                                            "visible": true,
+                                            "icon": "fa fa-none"
+                                        }
+                                    ],
+                                    "wid": "9800d4f3-6f50-41fc-9544-8e64a5e57e4a"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "01a0aaa2-d63f-4d11-8b7a-92968418e2c5",
+                "_collapsed": false
+            }
+        ],
+        "actionButtons": [],
+        "wid": "c04e9ce0-57ec-400b-8566-498869deadb6",
+        "metadata": []
+    },
+    "uuid": "modules-global_visibility_data-detail"
+}

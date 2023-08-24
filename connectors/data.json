@@ -1,0 +1,75 @@
+[
+    {
+        "name": "remote-fortisoar",
+        "label": "Remote FortiSOAR",
+        "category": "Utilities",
+        "description": "This connector facilitates automated interactions, with a FortiSOAR endpoint using FortiSOAR playbooks. Add the Remote FortiSOAR connector as a step in FortiSOAR playbooks and run REST API operations on FortiSOAR environments other than your own FortiSOAR environment",
+        "publisher": "Fortinet",
+        "operation_roles": [],
+        "configurations": [
+            {
+                "id": 18,
+                "config_id": "e6400747-5970-4b38-8ec6-ba78fbd8b93e",
+                "status": 1,
+                "name": "Ireland",
+                "default": false,
+                "config": {
+                    "url": "10.132.254.153",
+                    "password": "a2oXu56PvPrNnFDkShgHXRaVIUdt9bIyog==I3dmcn23@KlS2#!ck",
+                    "username": "csadmin",
+                    "auth_type": "Basic",
+                    "verify_ssl": false
+                },
+                "remote_status": [],
+                "health_status": [],
+                "connector": 33,
+                "agent": "b31fee5398c9b6f75d84a54ad26cc0d7",
+                "teams": []
+            },
+            {
+                "id": 19,
+                "config_id": "657ef974-39c8-4b56-940e-2208bac0f303",
+                "status": 1,
+                "name": "Australia",
+                "default": false,
+                "config": {
+                    "url": "10.132.254.206",
+                    "password": "q8M9FufzUSPosuTHLVB9M4zNG6mt9I1yUg==I3dmcn23@KlS2#!ck",
+                    "username": "csadmin",
+                    "auth_type": "Basic",
+                    "verify_ssl": false
+                },
+                "remote_status": [],
+                "health_status": [],
+                "connector": 33,
+                "agent": "b31fee5398c9b6f75d84a54ad26cc0d7",
+                "teams": []
+            },
+            {
+                "id": 21,
+                "config_id": "38785d6a-8e85-4645-9a1f-bda2c451a405",
+                "status": 1,
+                "name": "India",
+                "default": false,
+                "config": {
+                    "url": "10.132.254.136",
+                    "password": "6E6\/5hBrimuoTUEMDPru9o0y7wIFY3JB2daFMg==I3dmcn23@KlS2#!ck",
+                    "username": "csadmin",
+                    "auth_type": "Basic",
+                    "verify_ssl": false
+                },
+                "remote_status": [],
+                "health_status": [],
+                "connector": 33,
+                "agent": "b31fee5398c9b6f75d84a54ad26cc0d7",
+                "teams": []
+            }
+        ],
+        "dataImports": [],
+        "install_mode": "rpm",
+        "ingestionPlaybooks": {
+            "collections": [],
+            "exported_tags": []
+        }
+    }
+]

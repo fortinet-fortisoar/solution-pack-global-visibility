@@ -1,0 +1,53 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "grid",
+                                "config": {
+                                    "wid": "53951977-c9ef-413d-8eea-ca4d3bb4956e",
+                                    "module": "global_visibility_data",
+                                    "columns": [
+                                        "id"
+                                    ],
+                                    "expandableCol": [],
+                                    "relationshipField": [],
+                                    "checkboxStatus": false,
+                                    "editableFields": false,
+                                    "actionButtons": [
+                                        {
+                                            "id": "\/api\/3\/workflows\/e615f11a-7366-461d-9d57-7afce1ad34d9",
+                                            "name": "Refresh Global Visibility Dashboard",
+                                            "icon": "fa fa-refresh"
+                                        }
+                                    ],
+                                    "query": {
+                                        "sort": [],
+                                        "limit": 30,
+                                        "logic": "AND",
+                                        "filters": []
+                                    }
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "1aa63416-c15a-4e49-8938-571b447a9270",
+                "_collapsed": false
+            }
+        ],
+        "wid": "bff230ba-763e-4497-9322-052418d9743f",
+        "metadata": {
+            "customTemplateTitle": "Global Visibility Data",
+            "originalTemplateTitle": "Global Visibility Data"
+        }
+    },
+    "uuid": "modules-global_visibility_data-list"
+}
