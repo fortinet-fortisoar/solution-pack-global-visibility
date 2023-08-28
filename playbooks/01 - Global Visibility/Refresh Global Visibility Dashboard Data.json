@@ -1,0 +1,364 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Refresh Global Visibility Dashboard Data",
+    "aliasName": null,
+    "tag": null,
+    "description": "Trigger this playbook to refresh fetch updated data from different sites configured in Remote FortiSOAR Widget",
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/09e854ab-ec45-4705-8eeb-5d498c3bc5cc",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/38fd74a2-ceab-40c3-bbe0-721cf7877b24",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": [],
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "d82979fc-815e-4fd3-a37d-299e65a7f2fe"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Count",
+            "description": null,
+            "arguments": {
+                "totalAlertCount": "{{vars.alertsCount| sum}}",
+                "totalIncidentCount": "{{vars.incidentCount | sum}}",
+                "totalIndicatorCount": "{{vars.indicatorCount | sum}}"
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "4f2551df-dc51-43da-b21c-f27c45642a85"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Find Global Visibility Records",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "object",
+                            "field": "siteType",
+                            "value": "\/api\/3\/picklists\/e74fa34e-1032-4c7e-829a-ada155c44ff6",
+                            "_value": {
+                                "@id": "\/api\/3\/picklists\/e74fa34e-1032-4c7e-829a-ada155c44ff6",
+                                "display": "Master",
+                                "itemValue": "Master"
+                            },
+                            "operator": "eq"
+                        }
+                    ]
+                },
+                "module": "global_visibility_data?$limit=30",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "36f64455-b023-466e-b5b5-41c02e0818b9"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Global Record",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "object",
+                            "field": "siteType",
+                            "value": "\/api\/3\/picklists\/363763c9-68a4-4d2c-b282-cc692f59f965",
+                            "_value": {
+                                "@id": "\/api\/3\/picklists\/363763c9-68a4-4d2c-b282-cc692f59f965",
+                                "display": "Global",
+                                "itemValue": "Global"
+                            },
+                            "operator": "eq"
+                        }
+                    ]
+                },
+                "module": "global_visibility_data?$limit=30",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "17bc060a-814a-4b0b-a0b2-7471992b9ec7"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Refresh Global Visibility Dashboard",
+            "description": null,
+            "arguments": {
+                "route": "6aee5e0d-81d5-46e8-9ebd-672a72e74f7b",
+                "title": "Refresh Global Visibility Dashboard",
+                "resources": [
+                    "global_visibility_data"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "displayConditions": {
+                    "global_visibility_data": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "showToasterMessage": {
+                    "visible": false,
+                    "messageVisible": true
+                },
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "38fd74a2-ceab-40c3-bbe0-721cf7877b24"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Dashboard Data",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Find_Global_Visibility_Records}}",
+                    "__bulk": false,
+                    "parallel": true,
+                    "condition": ""
+                },
+                "arguments": {
+                    "siteData": "{{vars.item}}"
+                },
+                "apply_async": false,
+                "step_variables": {
+                    "alertsCount": "{{vars.steps.Update_Dashboard_Data| json_query('[*][\"alert\"][]')}}",
+                    "incidentCount": "{{vars.steps.Update_Dashboard_Data| json_query('[*][\"incident\"][]')}}",
+                    "indicatorCount": "{{vars.steps.Update_Dashboard_Data| json_query('[*][\"indicator\"][]')}}"
+                },
+                "pass_parent_env": false,
+                "pass_input_record": false,
+                "workflowReference": "\/api\/3\/workflows\/ab27d7d4-7507-4b80-a9ee-118389611659"
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "0a7753be-ba25-40ca-b5cf-db8e7acf47f9"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Record Tiles Widget",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "dashboardData": {
+                        "recordTilesROI": {
+                            "title": "Overall Automation ROI",
+                            "value": "$113,122"
+                        },
+                        "recordTilesTotalCount": {
+                            "data": {
+                                "Alerts": "{{vars.totalAlertCount}}",
+                                "Incidents": "{{vars.totalIncidentCount}}",
+                                "Indicators": "{{vars.totalIndicatorCount}}"
+                            },
+                            "title": "Total Requests",
+                            "value": "13691"
+                        },
+                        "recordTilesCustomerData": {
+                            "data": {
+                                "Gold": "4000",
+                                "Diamond": "5000",
+                                "Platinum": "3000"
+                            },
+                            "title": "Total Customers",
+                            "value": "12000"
+                        }
+                    }
+                },
+                "operation": "Append",
+                "collection": "{{vars.steps.Global_Record[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/global_visibility_data",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "4d7852f5-85a7-4901-bdd8-f7ca9f7c809b"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Find Global Visibility Records",
+            "targetStep": "\/api\/3\/workflow_steps\/36f64455-b023-466e-b5b5-41c02e0818b9",
+            "sourceStep": "\/api\/3\/workflow_steps\/d82979fc-815e-4fd3-a37d-299e65a7f2fe",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "da4844a2-effa-4be2-b00e-b8786a4a73af"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Count -> Global Record",
+            "targetStep": "\/api\/3\/workflow_steps\/17bc060a-814a-4b0b-a0b2-7471992b9ec7",
+            "sourceStep": "\/api\/3\/workflow_steps\/4f2551df-dc51-43da-b21c-f27c45642a85",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6e3d4e41-db95-4cb5-8c84-c0b2c28a5966"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Global Visibility Records -> Update Dashboard Data",
+            "targetStep": "\/api\/3\/workflow_steps\/0a7753be-ba25-40ca-b5cf-db8e7acf47f9",
+            "sourceStep": "\/api\/3\/workflow_steps\/36f64455-b023-466e-b5b5-41c02e0818b9",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "dd4c8e97-8d8e-4575-b4ea-10d8e27ae6dc"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Global Record -> Update Record Tiles Widget",
+            "targetStep": "\/api\/3\/workflow_steps\/4d7852f5-85a7-4901-bdd8-f7ca9f7c809b",
+            "sourceStep": "\/api\/3\/workflow_steps\/17bc060a-814a-4b0b-a0b2-7471992b9ec7",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "a3d2aea2-64ac-414c-a25b-b81f7581a9e8"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/d82979fc-815e-4fd3-a37d-299e65a7f2fe",
+            "sourceStep": "\/api\/3\/workflow_steps\/38fd74a2-ceab-40c3-bbe0-721cf7877b24",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "598b30d5-d8c1-40e4-8ca4-df7725165180"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update Dashboard Data -> Count",
+            "targetStep": "\/api\/3\/workflow_steps\/4f2551df-dc51-43da-b21c-f27c45642a85",
+            "sourceStep": "\/api\/3\/workflow_steps\/0a7753be-ba25-40ca-b5cf-db8e7acf47f9",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "d615a762-ab73-45df-b62f-b006fee20fa6"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "e615f11a-7366-461d-9d57-7afce1ad34d9",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "refresh_global_visibility_data"
+    ],
+    "schedules": [
+        {
+            "id": "gAAAAABk3GQsL-vDRzMCp1LPHwLyPESHRMyp3Io7qa4d_ksVX8PVzGLmoSAel0KgBfglJ_pv1sD-QamAaREVV1wyQ1DUdyDJ0Q==",
+            "crontab": {
+                "id": 12,
+                "minute": "*\/5",
+                "hour": "*",
+                "day_of_week": "*",
+                "day_of_month": "*",
+                "month_of_year": "*",
+                "timezone": "UTC"
+            },
+            "interval": null,
+            "name": "Refresh GVD",
+            "task": "workflow.tasks.periodic_task",
+            "args": "[]",
+            "kwargs": {
+                "expires": "2023-07-22T03:59:12.445Z",
+                "wf_iri": "\/api\/3\/workflows\/e615f11a-7366-461d-9d57-7afce1ad34d9",
+                "priority": {
+                    "@id": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+                    "@type": "Picklist",
+                    "itemValue": "Medium",
+                    "orderIndex": 1,
+                    "color": null,
+                    "icon": null,
+                    "listName": "\/api\/3\/picklist_names\/e104ef72-11b4-4d0c-be0e-e1cf3b87b5f2",
+                    "uuid": "2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+                    "id": 111,
+                    "importedBy": []
+                },
+                "exit_if_running": true,
+                "createUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+                "name": "Refresh GVD",
+                "description": "Refresh GVD",
+                "auth": {
+                    "auth_method": "CS HMAC"
+                },
+                "referenceid": null,
+                "schedule_entry_name": "Refresh GVD",
+                "schedule_id": "2d19eea4-fcd4-4554-9269-081dbc0071ba",
+                "start_time": null,
+                "timezone": "UTC"
+            },
+            "queue": null,
+            "exchange": null,
+            "routing_key": null,
+            "headers": "{}",
+            "priority": 3,
+            "expires": "2023-07-22T03:59:12.445000Z",
+            "expire_seconds": null,
+            "one_off": false,
+            "start_time": null,
+            "enabled": false,
+            "last_run_at": null,
+            "total_run_count": 0,
+            "date_changed": "2023-07-21T04:00:34.077277Z",
+            "description": "Refresh GVD",
+            "solar": null,
+            "clocked": null
+        }
+    ]
+}

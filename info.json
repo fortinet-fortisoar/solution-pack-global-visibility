@@ -1,0 +1,116 @@
+{
+    "name": "globalVisibility",
+    "version": "1.0.0",
+    "fsrMinCompatibility": "7.3.1",
+    "type": "solutionpack",
+    "local": true,
+    "label": "Global Visibility",
+    "dependencies": [
+        {
+            "name": "sOARFramework",
+            "type": "solutionpack",
+            "label": "SOAR Framework",
+            "minVersion": null
+        }
+    ],
+    "prerequisite": null,
+    "publisher": "Community",
+    "description": "Global Visibility SP\u00a0contains a dashboard to view data from different sites.",
+    "help": null,
+    "category": [
+        "Asset Management"
+    ],
+    "supportInfo": null,
+    "iconLarge": null,
+    "postInstallConfig": {
+        "enabled": true,
+        "widgets": [
+            {
+                "name": "globalVisibilityConfiguration",
+                "label": "Global Visibility Configuration",
+                "version": "1.0.0",
+                "autoLaunch": true,
+                "buttonLabel": "Configure",
+                "autoLaunchTriggered": true
+            }
+        ]
+    },
+    "recordTags": [
+        "global_visibility"
+    ],
+    "date": "2023-08-16T05:52:48+00:00",
+    "contents": {
+        "picklistNames": [
+            {
+                "name": "Site Type"
+            }
+        ],
+        "modules": {
+            "global_visibility_data": {
+                "name": "Global Visibility Data",
+                "apiName": "global_visibility_data"
+            }
+        },
+        "viewTemplates": {
+            "global_visibility_data": {
+                "name": "Global Visibility Data",
+                "apiName": "global_visibility_data",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
+            }
+        },
+        "roles": [
+            {
+                "name": "Full App Permissions"
+            }
+        ],
+        "playbooks": [
+            {
+                "name": "01 - Global Visibility"
+            }
+        ],       
+        "dashboards": [
+            {
+                "name": "Global Visibility"
+            }
+        ],
+        "connectors": [
+            {
+                "name": "Remote FortiSOAR",
+                "apiName": "remote-fortisoar"
+            }
+        ],
+        "widgets": [
+            {
+                "apiName": "funnelChart",
+                "name": "Funnel Chart"
+            },
+            {
+                "apiName": "globalVisibilityConfiguration",
+                "name": "Global Visibility Configuration"
+            },
+            {
+                "apiName": "topX",
+                "name": "Top X"
+            },
+            {
+                "apiName": "recordSummaryTile",
+                "name": "Record Summary Tile"
+            },
+            {
+                "apiName": "recordSummaryCard",
+                "name": "Record Summary Card"
+            }
+        ],
+        "recordSets": [
+            {
+                "name": "Global Visibility Data",
+                "apiName": "global_visibility_data",
+                "count": 1
+            }
+        ]
+    }
+}

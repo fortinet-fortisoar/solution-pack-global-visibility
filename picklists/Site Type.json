@@ -1,0 +1,40 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/caae59d6-0862-41e8-8fd9-a9039a7f5f8c",
+    "@type": "PicklistName",
+    "name": "Site Type",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/e74fa34e-1032-4c7e-829a-ada155c44ff6",
+            "@type": "Picklist",
+            "itemValue": "Master",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/caae59d6-0862-41e8-8fd9-a9039a7f5f8c",
+            "uuid": "e74fa34e-1032-4c7e-829a-ada155c44ff6"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/ebb064f7-bc32-4516-81a9-8f95d7b7e3a8",
+            "@type": "Picklist",
+            "itemValue": "Tenant",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/caae59d6-0862-41e8-8fd9-a9039a7f5f8c",
+            "uuid": "ebb064f7-bc32-4516-81a9-8f95d7b7e3a8"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/363763c9-68a4-4d2c-b282-cc692f59f965",
+            "@type": "Picklist",
+            "itemValue": "Global",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/caae59d6-0862-41e8-8fd9-a9039a7f5f8c",
+            "uuid": "363763c9-68a4-4d2c-b282-cc692f59f965"
+        }
+    ],
+    "uuid": "caae59d6-0862-41e8-8fd9-a9039a7f5f8c"
+}

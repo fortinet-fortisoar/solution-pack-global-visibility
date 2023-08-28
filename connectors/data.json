@@ -1,0 +1,17 @@
+[
+    {
+        "name": "remote-fortisoar",
+        "label": "Remote FortiSOAR",
+        "category": "Utilities",
+        "description": "This connector facilitates automated interactions, with a FortiSOAR endpoint using FortiSOAR playbooks. Add the Remote FortiSOAR connector as a step in FortiSOAR playbooks and run REST API operations on FortiSOAR environments other than your own FortiSOAR environment",
+        "publisher": "Fortinet",
+        "operation_roles": [],
+        "configurations": [],
+        "dataImports": [],
+        "install_mode": "rpm",
+        "ingestionPlaybooks": {
+            "collections": [],
+            "exported_tags": []
+        }
+    }
+]

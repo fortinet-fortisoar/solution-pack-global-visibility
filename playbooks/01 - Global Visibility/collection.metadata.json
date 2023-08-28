@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/3\/contexts\/WorkflowCollection",
+    "@type": "WorkflowCollection",
+    "name": "01 - Global Visibility",
+    "description": "Playbook to refresh Global Visibility Dashboard data and create records of sites defined in Remote FortiSOAR Connector",
+    "visible": true,
+    "image": null,
+    "uuid": "09e854ab-ec45-4705-8eeb-5d498c3bc5cc",
+    "deletedAt": null,
+    "recordTags": []
+}
