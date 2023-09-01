@@ -10,17 +10,26 @@
 
 ## Prerequisites
 The **Global Visibility** solution pack depends on the following solution packs that are installed automatically &ndash; if not already installed.
-| Solution Pack Name | Version | Purpose |
-| :--------------------- | :---------------------| :--------------------------------------- |
-| SOAR Framework | v2.0.1 or later | Required for Alerts, Assets, Incident modules |
 
+| Solution Pack Name | Version         | Purpose                                       |
+|:-------------------|:----------------|:----------------------------------------------|
+| SOAR Framework     | v2.0.1 or later | Required for Alerts, Assets, Incident modules |
 
+Before installing the FortiSOAR Global Visibility Solution Pack, ensure the following prerequisites are met:
+
+1. A working FortiSOAR instance at each site
+2. Access to the FortiSOAR API of each instance
+3. User credentials with appropriate permissions to access data
+4. Remote FortiSOAR connector for Global Visibility data aggregation
 
 # Configuration
-Remote FortiSOAR connector is be installed with the solution pack, user needs to configure the connector with desired sites to use the dashboard widgets.
 
->* **Remote FortiSOAR** - This connector facilitates automated interactions, with a FortiSOAR endpoint using FortiSOAR playbooks. Add the Remote FortiSOAR connector as a step in FortiSOAR playbooks and run REST API operations on FortiSOAR environments other than your own FortiSOAR environment. To configure and use the Remote FortiSOAR connector, refer to [Configuring Remote FortiSOAR](https://docs.fortinet.com/fortisoar/connectors/remotefsr)
+- The **Global Visibility** solution pack launches the configuration wizard as soon as it finishes installation. However, You can also click the <strong>Configure</strong> button on the solution pack's installation page to configure the sites.
 
+
+- Remote FortiSOAR connector installs with the solution pack. You need to configure the connector with relevant sites to use the dashboard widgets.
+
+    - **Remote FortiSOAR** - To configure and use the Remote FortiSOAR connector, refer to [Configuring Remote FortiSOAR](https://docs.fortinet.com/fortisoar/connectors/remotefsr)
 
 # Next Steps
 | [Usage](./usage.md) | [Contents](./contents.md) |
