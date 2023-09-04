@@ -17,7 +17,7 @@
     "steps": [
       {
         "@type": "WorkflowStep",
-        "name": "Global Record",
+        "name": "Find Global Record",
         "description": null,
         "arguments": {
           "query": {
@@ -41,7 +41,7 @@
           "step_variables": []
         },
         "status": null,
-        "top": "1380",
+        "top": "1245",
         "left": "125",
         "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928770",
         "group": null,
@@ -115,7 +115,7 @@
         "name": "Get Available Sites",
         "description": "Get List of all Configurations with health check available",
         "arguments": {
-          "siteNameList": "{% set data = [] %}\n{% for item in vars.connectorInfo %}\n{%if item.status == \"Available\"%}\n{% set _ = data.append(vars.IdToName.get(item.config_id)) %}\n{%endif%}\n{% endfor %}{{data}}"
+          "siteNameList": "{% set data = [] %}{% for item in vars.steps.Fetch_Connector_Health | json_query(\"[*][data][]\") %}{% if item.status == \"Available\"%}{% set _ = data.append(vars.IdToName.get(item.config_id)) %}{% endif %}{% endfor %}{{data}}"
         },
         "status": null,
         "top": "570",
@@ -126,7 +126,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Master Site Names",
+        "name": "Find Master Site Names",
         "description": "Find master records",
         "arguments": {
           "query": {
@@ -148,7 +148,7 @@
           },
           "module": "global_visibility_data?$limit=30",
           "step_variables": {
-            "siteRecords": "{% set data = [] %}\n{% for item in vars.steps.Master_Site_Names %} \n{% set _ = data.append(item.siteName)%}\n{%endfor%}\n{{data}}"
+            "siteRecords": "{% set data = [] %}{% for item in vars.steps.Find_Master_Site_Names %}{% set _ = data.append(item.siteName) %}{% endfor %}{{data}}"
           }
         },
         "status": null,
@@ -160,7 +160,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Connector details",
+        "name": "Connector Details",
         "description": null,
         "arguments": {
           "name": "Utilities",
@@ -174,9 +174,7 @@
           "operation": "make_cyops_request",
           "operationTitle": "FSR: Make FortiSOAR API Call",
           "pickFromTenant": false,
-          "step_variables": {
-            "connector_version": "{{vars.steps.Connector_details.data.data[0].version}}"
-          }
+          "step_variables": []
         },
         "status": null,
         "top": "300",
@@ -187,17 +185,17 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Check Connector Health",
+        "name": "Fetch Connector Health",
         "description": null,
         "arguments": {
           "params": {
-            "iri": "/api/integration/connectors/healthcheck/remote-fortisoar/{{vars.connector_version}}/?config={{vars.item.config_id}}",
+            "iri": "/api/integration/connectors/healthcheck/remote-fortisoar/{{vars.steps.Connector_Details.data.data[0].version}}/?config={{vars.item.config_id}}",
             "body": "",
             "method": "GET"
           },
           "version": "3.2.4",
           "for_each": {
-            "item": "{{vars.steps.Connector_details.data.data[0].configuration}}",
+            "item": "{{vars.steps.Connector_Details.data.data[0].configuration}}",
             "parallel": false,
             "condition": ""
           },
@@ -205,8 +203,7 @@
           "operation": "make_cyops_request",
           "operationTitle": "FSR: Make FortiSOAR API Call",
           "step_variables": {
-            "IdToName": "{% set data = dict() %}{% for item in vars.steps.Connector_details.data.data[0].configuration %}{% set _ = data.update({item.config_id : item.name}) %}{% endfor %}{{data}}",
-            "connectorInfo": "{{ vars.result | json_query(\"[*][data][]\") }}"
+            "IdToName": "{% set data = dict() %}{% for item in vars.steps.Connector_Details.data.data[0].configuration %}{% set _ = data.update({item.config_id : item.name}) %}{% endfor %}{{data}}"
           }
         },
         "status": null,
@@ -247,26 +244,9 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Count",
-        "description": "Add all for record summary tile widget",
-        "arguments": {
-          "totalRoi": "$ {{'{:,.0f}'.format(vars.roiCount | sum) }}",
-          "totalRecords": "{{vars.alertsCount + vars.warRoomCount + vars.incidentCount}}"
-        },
-        "status": null,
-        "top": "1245",
-        "left": "125",
-        "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-        "group": null,
-        "uuid": "9034e021-b415-4b1b-979b-9bf6a6ede83e"
-      },
-      {
-        "@type": "WorkflowStep",
         "name": "Configuration",
         "description": null,
-        "arguments": {
-          "siteNameList": ""
-        },
+        "arguments": [],
         "status": null,
         "top": "165",
         "left": "125",
@@ -290,9 +270,10 @@
           },
           "apply_async": false,
           "step_variables": {
-            "roiCount": "{{vars.steps.Update_Dashboard_Data| json_query('[*][\"roi\"][]')}}",
+            "roiCount": "$ {{'{:,.0f}'.format((vars.steps.Update_Dashboard_Data| json_query('[*][\"roi\"][]')) | sum) }}",
             "alertsCount": "{{(vars.steps.Update_Dashboard_Data| json_query('[*][\"alert\"][]')) | sum}}",
             "tenantsCount": "{{(vars.steps.Update_Dashboard_Data| json_query('[*][\"tenants\"][]')) | sum}}",
+            "totalRecords": "{{((vars.steps.Update_Dashboard_Data| json_query('[*][\"alert\"][]')) | sum) + ((vars.steps.Update_Dashboard_Data| json_query('[*][\"incident\"][]')) | sum) + ((vars.steps.Update_Dashboard_Data| json_query('[*][\"warRooms\"][]')) | sum)}}",
             "warRoomCount": "{{(vars.steps.Update_Dashboard_Data| json_query('[*][\"warRooms\"][]')) | sum}}",
             "incidentCount": "{{(vars.steps.Update_Dashboard_Data| json_query('[*][\"incident\"][]')) | sum}}"
           },
@@ -316,7 +297,7 @@
             "dashboardData": {
               "recordTilesROI": {
                 "title": "Overall Automation ROI",
-                "value": "{{vars.totalRoi}}"
+                "value": "{{vars.roiCount}}"
               },
               "recordTilesTotalCount": {
                 "data": {
@@ -334,7 +315,7 @@
             }
           },
           "operation": "Append",
-          "collection": "{{vars.steps.Global_Record[0]['@id']}}",
+          "collection": "{{vars.steps.Find_Global_Record[0]['@id']}}",
           "__recommend": [],
           "collectionType": "/api/3/global_visibility_data",
           "fieldOperation": {
@@ -343,7 +324,7 @@
           "step_variables": []
         },
         "status": null,
-        "top": "1515",
+        "top": "1380",
         "left": "125",
         "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928722",
         "group": null,
@@ -351,24 +332,6 @@
       }
     ],
     "routes": [
-      {
-        "@type": "WorkflowRoute",
-        "name": "Update Dashboard Data -> Count",
-        "targetStep": "/api/3/workflow_steps/9034e021-b415-4b1b-979b-9bf6a6ede83e",
-        "sourceStep": "/api/3/workflow_steps/e1ccfce7-ae81-47b0-ac13-8ee1404bbff1",
-        "label": null,
-        "isExecuted": false,
-        "uuid": "2291cd5e-a0b9-46d7-a274-c3d8e26a567e"
-      },
-      {
-        "@type": "WorkflowRoute",
-        "name": "Count -> Global Record",
-        "targetStep": "/api/3/workflow_steps/04b80069-eadb-4859-b9fe-912c437a5354",
-        "sourceStep": "/api/3/workflow_steps/9034e021-b415-4b1b-979b-9bf6a6ede83e",
-        "label": null,
-        "isExecuted": false,
-        "uuid": "347e5fa5-abcb-48dc-accc-770f4c575c75"
-      },
       {
         "@type": "WorkflowRoute",
         "name": "Configuration -> Connector details",
@@ -422,6 +385,15 @@
         "label": null,
         "isExecuted": false,
         "uuid": "8f0d0269-2984-4ae2-b423-5011074c79f7"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Update Dashboard Data -> Global Record",
+        "targetStep": "/api/3/workflow_steps/04b80069-eadb-4859-b9fe-912c437a5354",
+        "sourceStep": "/api/3/workflow_steps/e1ccfce7-ae81-47b0-ac13-8ee1404bbff1",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "a571c77d-8b95-45fe-835c-81a1f5d1e3a4"
       },
       {
         "@type": "WorkflowRoute",
