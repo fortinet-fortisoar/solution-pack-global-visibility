@@ -208,7 +208,7 @@
           "config": "{{vars.input.params.siteData.siteName}}",
           "params": {
             "iri": "/api/query/incidents",
-            "body": "{\n    \"limit\": 30,\n    \"search\": \"\",\n    \"logic\": \"AND\",\n    \"page\": 1,\n    \"widgetQuery\": null,\n    \"isRelationshipFieldPresent\": false,\n    \"filters\": [\n        {\n            \"field\": \"resolveddate\",\n            \"value\": \"{{arrow.utcnow().shift(days=vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}\",\n            \"operator\": \"date\",\n            \"type\": \"datetime\",\n            \"OPERATOR_KEY\": \"$\",\n            \"logic\": \"AND\",\n            \"filters\": [\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"gte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().shift(days=-vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}\"\n                },\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"lte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}\"\n                }\n            ]\n        },\n        {\n            \"field\": \"status\",\n            \"value\": \"/api/3/picklists/bb73fd5e-f699-11e7-8c3f-9a214cf093ae\",\n            \"display\": \"Resolved\",\n            \"operator\": \"eq\",\n            \"type\": \"object\",\n            \"OPERATOR_KEY\": \"$\",\n            \"displayTemplate\": \"\"\n        }\n    ],\n    \"sort\": [],\n    \"aggregates\": [\n        {\n            \"alias\": \"value\",\n            \"field\": \"resolveddate,createDate\",\n            \"operator\": \"avg\"\n        }\n    ]\n}",
+            "body": "{\n    \"limit\": 30,\n    \"search\": \"\",\n    \"logic\": \"AND\",\n    \"page\": 1,\n    \"widgetQuery\": null,\n    \"isRelationshipFieldPresent\": false,\n    \"filters\": [\n        {\n            \"field\": \"resolveddate\",\n            \"value\": \"{{arrow.utcnow().shift(days=vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss\")}}\",\n            \"operator\": \"date\",\n            \"type\": \"datetime\",\n            \"OPERATOR_KEY\": \"$\",\n            \"logic\": \"AND\",\n            \"filters\": [\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"gte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().shift(days=-vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss\")}}\"\n                },\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"lte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().format(\"YYYY-MM-DD HH:mm:ss\")}}\"\n                }\n            ]\n        },\n        {\n            \"field\": \"status\",\n            \"value\": \"/api/3/picklists/bb73fd5e-f699-11e7-8c3f-9a214cf093ae\",\n            \"display\": \"Resolved\",\n            \"operator\": \"eq\",\n            \"type\": \"object\",\n            \"OPERATOR_KEY\": \"$\",\n            \"displayTemplate\": \"\"\n        }\n    ],\n    \"sort\": [],\n    \"aggregates\": [\n        {\n            \"alias\": \"value\",\n            \"field\": \"resolveddate,createDate\",\n            \"operator\": \"avg\"\n        }\n    ]\n}",
             "method": "POST",
             "params": "",
             "headers": "{\"accept\": \"application/json\"}"
@@ -219,12 +219,12 @@
           "operationTitle": "Make an API call",
           "pickFromTenant": false,
           "step_variables": {
-            "incidentMTTR": "{{vars.steps.Incident_MTTR.data[\"hydra:member\"][0].value}}"
+            "incidentMTTR": "{%if vars.steps.Incident_MTTR.data[\"hydra:member\"][0].value != None %}{{vars.steps.Incident_MTTR.data[\"hydra:member\"][0].value.split('.')[0]}}{%endif%}"
           }
         },
         "status": null,
-        "top": "1245",
-        "left": "475",
+        "top": "1240",
+        "left": "480",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "7e80e898-658a-4deb-b589-21c99daee66c"
@@ -249,12 +249,12 @@
           "operationTitle": "Make an API call",
           "pickFromTenant": false,
           "step_variables": {
-            "alertMTTR": "{{vars.steps.Alerts_MTTR.data[\"hydra:member\"][0].value}}"
+            "alertMTTR": "{%if vars.steps.Alerts_MTTR.data[\"hydra:member\"][0].value != None %}{{vars.steps.Alerts_MTTR.data[\"hydra:member\"][0].value.split('.')[0]}}{%endif%}"
           }
         },
         "status": null,
         "top": "1380",
-        "left": "475",
+        "left": "480",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "94b0396f-8564-4adf-bd2a-7fef7f46ca0f"
