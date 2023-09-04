@@ -1,0 +1,16 @@
+[
+    {
+        "@type": "GlobalVisibilityData",
+        "siteName": "Global",
+        "dashboardData": [],
+        "siteType": "\/api\/3\/picklists\/363763c9-68a4-4d2c-b282-cc692f59f965",
+        "uuid": "296d0f49-170a-4f9e-aefb-a7d710f3e407",
+        "createUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "createDate": 1693312328.791347,
+        "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "modifyDate": 1693571367.84783,
+        "id": 3,
+        "recordTags": [],
+        "deletedAt": null
+    }
+]

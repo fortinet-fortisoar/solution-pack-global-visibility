@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/3\/contexts\/StagingModelMetadata",
-    "@id": "\/api\/3\/staging_model_metadata\/f752c0d0-c4a3-4d59-92ee-aa80608677e9",
+    "@id": "\/api\/3\/staging_model_metadatas\/dc079e83-a495-460b-b890-2eb97e28f48d",
     "@type": "StagingModelMetadata",
     "type": "global_visibility_data",
     "parentType": null,
@@ -31,6 +31,7 @@
     "writable": true,
     "attributes": [
         {
+            "@id": "\/api\/3\/attribute_metadatas\/64d569f7-bd59-457c-994c-ea6323a90cf9",
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "siteName",
@@ -68,13 +69,14 @@
             "identifier": null,
             "unique": false,
             "recommend": false,
-            "skipSerialization": false,
+            "uuid": "64d569f7-bd59-457c-994c-ea6323a90cf9",
             "displayName": "{{ siteName }}",
             "descriptions": {
                 "singular": "Site Name"
             }
         },
         {
+            "@id": "\/api\/3\/attribute_metadatas\/587d6cce-179f-41ce-88f7-723b957dac2c",
             "@type": "AttributeMetadata",
             "type": "picklists",
             "name": "siteType",
@@ -144,13 +146,14 @@
             "identifier": null,
             "unique": false,
             "recommend": false,
-            "skipSerialization": false,
+            "uuid": "587d6cce-179f-41ce-88f7-723b957dac2c",
             "displayName": "{{ siteType }}",
             "descriptions": {
                 "singular": "Site Type"
             }
         },
         {
+            "@id": "\/api\/3\/attribute_metadatas\/e52f1d0b-5c18-4ba5-8201-951e36a5bb67",
             "@type": "AttributeMetadata",
             "type": "object",
             "name": "dashboardData",
@@ -189,7 +192,7 @@
             "identifier": null,
             "unique": false,
             "recommend": false,
-            "skipSerialization": false,
+            "uuid": "e52f1d0b-5c18-4ba5-8201-951e36a5bb67",
             "displayName": "{{ dashboardData }}",
             "descriptions": {
                 "singular": "Dashboard Data"
@@ -207,7 +210,7 @@
         "delete_primary_data_after": 60
     },
     "archivalFilters": [],
-    "uuid": "f752c0d0-c4a3-4d59-92ee-aa80608677e9",
+    "uuid": "dc079e83-a495-460b-b890-2eb97e28f48d",
     "displayName": "{{ siteName }}",
     "descriptions": {
         "singular": "Global Visibility Data",
