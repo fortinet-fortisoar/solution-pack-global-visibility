@@ -320,7 +320,7 @@
               },
               "recordTilesTotalCount": {
                 "data": {
-                  "Alerts": "{{vars.alertCount}}",
+                  "Alerts": "{{vars.alertsCount}}",
                   "Incidents": "{{vars.incidentCount}}",
                   "War Rooms": "{{vars.warRoomCount}}"
                 },
