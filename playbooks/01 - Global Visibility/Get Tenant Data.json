@@ -38,7 +38,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Tenants",
+        "name": "Get Tenant Alerts",
         "description": null,
         "arguments": {
           "name": "Remote FortiSOAR",
@@ -66,7 +66,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Open Incidents",
+        "name": "Get Tenant Open Incidents",
         "description": null,
         "arguments": {
           "name": "Remote FortiSOAR",
@@ -94,11 +94,11 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "All Open Alerts and Incidents",
+        "name": "Return All Open Alerts and Incidents",
         "description": null,
         "arguments": {
-          "alertsCount": "{% set tenantData = {} %}{% set _ = tenantData.update({vars.input.params.tenantData.name : vars.steps.Tenants.data['hydra:totalItems']  }) %}\n{{tenantData}}",
-          "incidentCount": "{% set data = {} %}{% set _ = data.update({vars.input.params.tenantData.name : vars.steps.Open_Incidents.data['hydra:totalItems']  }) %}\n{{data}}"
+          "alertsCount": "{% set tenantData = {} %}{% set _ = tenantData.update({vars.input.params.tenantData.name : vars.steps.Get_Tenant_Alerts.data['hydra:totalItems']  }) %}{{tenantData}}",
+          "incidentCount": "{% set data = {} %}{% set _ = data.update({vars.input.params.tenantData.name : vars.steps.Get_Tenant_Open_Incidents.data['hydra:totalItems']  }) %}{{data}}"
         },
         "status": null,
         "top": "30",

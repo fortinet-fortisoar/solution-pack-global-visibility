@@ -33,11 +33,11 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Get Tenant Alerts",
+        "name": "Get Tenant Data",
         "description": null,
         "arguments": {
           "for_each": {
-            "item": "{{vars.steps.Tenant_List.data['hydra:member']}}",
+            "item": "{{vars.steps.Get_Tenant_List.data['hydra:member']}}",
             "parallel": false,
             "condition": "{{vars.item.name != \"Self\"}}"
           },
@@ -47,8 +47,8 @@
           },
           "apply_async": false,
           "step_variables": {
-            "tenantData": "{{vars.steps.Get_Tenant_Alerts | json_query( '[*][\"alertsCount\"][]') | flatten}}",
-            "tenantIncidentData": "{{vars.steps.Get_Tenant_Alerts | json_query( '[*][\"incidentCount\"][]') | flatten}}"
+            "tenantData": "{{vars.steps.Get_Tenant_Data | json_query( '[*][\"alertsCount\"][]') | flatten}}",
+            "tenantIncidentData": "{{vars.steps.Get_Tenant_Data | json_query( '[*][\"incidentCount\"][]') | flatten}}"
           },
           "pass_parent_env": false,
           "pass_input_record": false,
@@ -80,7 +80,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Record to update",
+        "name": "Find Record to Update",
         "description": null,
         "arguments": {
           "query": {
@@ -127,11 +127,11 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Tenant Data",
+        "name": "Refine Tenant Data",
         "description": null,
         "arguments": {
           "tenantData": "{% set result = {} %}{% for item in vars.tenantData %}{% for key, value in item.items() %}{% set _ = result.update({key: value}) %}{% endfor %}{% endfor %}{{ result }}",
-          "totalTenants": "{{vars.steps.Tenant_List.data['hydra:totalItems'] | int - 1 }}",
+          "totalTenants": "{{vars.steps.Get_Tenant_List.data['hydra:totalItems'] | int - 1 }}",
           "tenantIncidents": "{% set result = {} %}{% for item in vars.tenantIncidentData %}{% for key, value in item.items() %}{% set _ = result.update({key: value}) %}{% endfor %}{% endfor %}{{ result }}"
         },
         "status": null,
@@ -230,7 +230,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Tenant List",
+        "name": "Get Tenant List",
         "description": null,
         "arguments": {
           "name": "Remote FortiSOAR",
@@ -275,14 +275,14 @@
                   "Alert MTTR": "{{vars.alertMTTR}}",
                   "Incident MTTR": "{{vars.incidentMTTR}}",
                   "Total Tenants": "{{vars.totalTenants}}",
-                  "Active Incidents": "{{vars.activeIncidentCount}}"
+                  "Active Incidents": "{{vars.steps.Active_Incidents.data['hydra:totalItems']}}"
                 },
                 "title": "{{vars.input.params.siteData.siteName}}"
               }
             }
           },
           "operation": "Append",
-          "collection": "{{vars.steps.Record_to_update[0]['@id']}}",
+          "collection": "{{vars.steps.Find_Record_to_Update[0]['@id']}}",
           "__recommend": [],
           "collectionType": "/api/3/global_visibility_data",
           "fieldOperation": {
@@ -301,7 +301,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Output",
+        "name": "Return Output",
         "description": null,
         "arguments": {
           "roi": "{{vars.steps.Connector_Actions_Executed_for_a_Site.data.actionCount.current | int * vars.avgTimeToExecute* vars.dollarValue / 60 }}",
@@ -368,9 +368,7 @@
           "operation": "make_api_call",
           "operationTitle": "Make an API call",
           "pickFromTenant": false,
-          "step_variables": {
-            "activeIncidentCount": "{{vars.steps.Active_Incidents.data['hydra:totalItems']}}"
-          }
+          "step_variables": []
         },
         "status": null,
         "top": "570",

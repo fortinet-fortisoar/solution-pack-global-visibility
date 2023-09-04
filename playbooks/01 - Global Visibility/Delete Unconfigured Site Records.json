@@ -70,7 +70,7 @@
         "name": "Get Available Sites",
         "description": null,
         "arguments": {
-          "siteNameList": "{% set data = [] %}\n{% for item in vars.connectorInfo %}\n{%if item.status == \"Available\"%}\n{% set _ = data.append(vars.IdToName.get(item.config_id)) %}\n{%endif%}\n{% endfor %}{{data}}"
+          "siteNameList": "{% set data = [] %}{% for item in vars.connectorInfo %}{%if item.status == \"Available\"%}{% set _ = data.append(vars.IdToName.get(item.config_id)) %}{%endif%}{% endfor %}{{data}}"
         },
         "status": null,
         "top": "435",
@@ -81,7 +81,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Connector details",
+        "name": "Get Connector Details",
         "description": null,
         "arguments": {
           "name": "Utilities",
@@ -95,9 +95,7 @@
           "operation": "make_cyops_request",
           "operationTitle": "FSR: Make FortiSOAR API Call",
           "pickFromTenant": false,
-          "step_variables": {
-            "connector_version": "{{vars.steps.Connector_details.data.data[0].version}}"
-          }
+          "step_variables": []
         },
         "status": null,
         "top": "165",
@@ -112,13 +110,13 @@
         "description": null,
         "arguments": {
           "params": {
-            "iri": "/api/integration/connectors/healthcheck/remote-fortisoar/{{vars.connector_version}}/?config={{vars.item.config_id}}",
+            "iri": "/api/integration/connectors/healthcheck/remote-fortisoar/{{vars.steps.Connector_details.data.data[0].version}}/?config={{vars.item.config_id}}",
             "body": "",
             "method": "GET"
           },
           "version": "3.2.4",
           "for_each": {
-            "item": "{{vars.steps.Connector_details.data.data[0].configuration}}",
+            "item": "{{vars.steps.Get_Connector_Details.data.data[0].configuration}}",
             "parallel": false,
             "condition": ""
           },
@@ -126,7 +124,7 @@
           "operation": "make_cyops_request",
           "operationTitle": "FSR: Make FortiSOAR API Call",
           "step_variables": {
-            "IdToName": "{% set data = dict() %}{% for item in vars.steps.Connector_details.data.data[0].configuration %}{% set _ = data.update({item.config_id : item.name}) %}{% endfor %}{{data}}",
+            "IdToName": "{% set data = dict() %}{% for item in vars.steps.Get_Connector_Details.data.data[0].configuration %}{% set _ = data.update({item.config_id : item.name}) %}{% endfor %}{{data}}",
             "connectorInfo": "{{ vars.result | json_query(\"[*][data][]\") }}"
           }
         },
@@ -168,7 +166,7 @@
           },
           "module": "global_visibility_data?$limit=30",
           "step_variables": {
-            "recordIri": "{% set data = [] %}\n{% for item in vars.steps.Find_Master_Records %}\n{% set _ = data.append(item[\"uuid\"])%}\n{% endfor %}{{data}}"
+            "recordIri": "{% set data = [] %}{% for item in vars.steps.Find_Master_Records %}{% set _ = data.append(item[\"uuid\"])%}{% endfor %}{{data}}"
           }
         },
         "status": null,
