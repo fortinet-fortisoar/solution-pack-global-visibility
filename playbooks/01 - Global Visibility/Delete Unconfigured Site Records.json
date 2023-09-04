@@ -4,235 +4,235 @@
     "name": "Delete Unconfigured Site Records",
     "aliasName": null,
     "tag": null,
-    "description": "This playbook syncs records with the sites configured in Remote Fortisoar Connector and deletes the unwanted records",
+    "description": "This playbook syncs records with the sites configured in Remote FortiSOAR Connector and Deletes records from Global Visibility Module whose respective Site's configuration is either deleted or health check is unavailable.",
     "isActive": true,
     "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
     "parameters": [],
     "synchronous": false,
-    "collection": "\/api\/3\/workflow_collections\/09e854ab-ec45-4705-8eeb-5d498c3bc5cc",
+    "collection": "/api/3/workflow_collections/09e854ab-ec45-4705-8eeb-5d498c3bc5cc",
     "versions": [],
-    "triggerStep": "\/api\/3\/workflow_steps\/44ac665c-5df0-478e-babc-5fefb3183338",
+    "triggerStep": "/api/3/workflow_steps/44ac665c-5df0-478e-babc-5fefb3183338",
     "steps": [
-        {
-            "@type": "WorkflowStep",
-            "name": "Delete Master Records",
-            "description": null,
-            "arguments": {
-                "params": {
-                    "iri": "\/api\/3\/delete\/global_visibility_data",
-                    "body": "{\"ids\":{{vars.recordIri}}}",
-                    "method": "DELETE"
-                },
-                "version": "3.2.4",
-                "connector": "cyops_utilities",
-                "operation": "make_cyops_request",
-                "operationTitle": "FSR: Make FortiSOAR API Call",
-                "step_variables": []
-            },
-            "status": null,
-            "top": "705",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
-            "group": null,
-            "uuid": "1cda6877-9021-4983-a0d8-3b84e8f7fef3"
+      {
+        "@type": "WorkflowStep",
+        "name": "Delete Master Records",
+        "description": null,
+        "arguments": {
+          "params": {
+            "iri": "/api/3/delete/global_visibility_data",
+            "body": "{\"ids\":{{vars.recordIri}}}",
+            "method": "DELETE"
+          },
+          "version": "3.2.4",
+          "connector": "cyops_utilities",
+          "operation": "make_cyops_request",
+          "operationTitle": "FSR: Make FortiSOAR API Call",
+          "step_variables": []
         },
-        {
-            "@type": "WorkflowStep",
-            "name": "Start",
-            "description": null,
-            "arguments": {
-                "route": "241d2c45-dbcc-4210-8c84-bc531e6e334c",
-                "resources": [
-                    "global_visibility_data"
-                ],
-                "inputVariables": [],
-                "step_variables": {
-                    "input": {
-                        "params": [],
-                        "records": "{{vars.input.records}}"
-                    }
-                },
-                "executeButtonText": "Execute",
-                "noRecordExecution": true,
-                "singleRecordExecution": false
-            },
-            "status": null,
-            "top": "30",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
-            "group": null,
-            "uuid": "44ac665c-5df0-478e-babc-5fefb3183338"
+        "status": null,
+        "top": "705",
+        "left": "125",
+        "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+        "group": null,
+        "uuid": "1cda6877-9021-4983-a0d8-3b84e8f7fef3"
+      },
+      {
+        "@type": "WorkflowStep",
+        "name": "Start",
+        "description": null,
+        "arguments": {
+          "route": "241d2c45-dbcc-4210-8c84-bc531e6e334c",
+          "resources": [
+            "global_visibility_data"
+          ],
+          "inputVariables": [],
+          "step_variables": {
+            "input": {
+              "params": [],
+              "records": "{{vars.input.records}}"
+            }
+          },
+          "executeButtonText": "Execute",
+          "noRecordExecution": true,
+          "singleRecordExecution": false
         },
-        {
-            "@type": "WorkflowStep",
-            "name": "Get Available Sites",
-            "description": null,
-            "arguments": {
-                "siteNameList": "{% set data = [] %}\n{% for item in vars.connectorInfo %}\n{%if item.status == \"Available\"%}\n{% set _ = data.append(vars.IdToName.get(item.config_id)) %}\n{%endif%}\n{% endfor %}{{data}}"
-            },
-            "status": null,
-            "top": "435",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-            "group": null,
-            "uuid": "597471ab-1819-4bb7-9d59-70d25de25c4b"
+        "status": null,
+        "top": "30",
+        "left": "125",
+        "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+        "group": null,
+        "uuid": "44ac665c-5df0-478e-babc-5fefb3183338"
+      },
+      {
+        "@type": "WorkflowStep",
+        "name": "Get Available Sites",
+        "description": null,
+        "arguments": {
+          "siteNameList": "{% set data = [] %}\n{% for item in vars.connectorInfo %}\n{%if item.status == \"Available\"%}\n{% set _ = data.append(vars.IdToName.get(item.config_id)) %}\n{%endif%}\n{% endfor %}{{data}}"
         },
-        {
-            "@type": "WorkflowStep",
-            "name": "Connector details",
-            "description": null,
-            "arguments": {
-                "name": "Utilities",
-                "params": {
-                    "iri": "\/api\/integration\/connectors\/?name=remote-fortisoar",
-                    "body": "",
-                    "method": "GET"
-                },
-                "version": "3.2.4",
-                "connector": "cyops_utilities",
-                "operation": "make_cyops_request",
-                "operationTitle": "FSR: Make FortiSOAR API Call",
-                "pickFromTenant": false,
-                "step_variables": {
-                    "connector_version": "{{vars.steps.Connector_details.data.data[0].version}}"
-                }
-            },
-            "status": null,
-            "top": "165",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
-            "group": null,
-            "uuid": "b71c5431-482b-4a9a-8917-de6f275e5de6"
+        "status": null,
+        "top": "435",
+        "left": "125",
+        "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+        "group": null,
+        "uuid": "597471ab-1819-4bb7-9d59-70d25de25c4b"
+      },
+      {
+        "@type": "WorkflowStep",
+        "name": "Connector details",
+        "description": null,
+        "arguments": {
+          "name": "Utilities",
+          "params": {
+            "iri": "/api/integration/connectors/?name=remote-fortisoar",
+            "body": "",
+            "method": "GET"
+          },
+          "version": "3.2.4",
+          "connector": "cyops_utilities",
+          "operation": "make_cyops_request",
+          "operationTitle": "FSR: Make FortiSOAR API Call",
+          "pickFromTenant": false,
+          "step_variables": {
+            "connector_version": "{{vars.steps.Connector_details.data.data[0].version}}"
+          }
         },
-        {
-            "@type": "WorkflowStep",
-            "name": "Check Connector Health",
-            "description": null,
-            "arguments": {
-                "params": {
-                    "iri": "\/api\/integration\/connectors\/healthcheck\/remote-fortisoar\/{{vars.connector_version}}\/?config={{vars.item.config_id}}",
-                    "body": "",
-                    "method": "GET"
-                },
-                "version": "3.2.4",
-                "for_each": {
-                    "item": "{{vars.steps.Connector_details.data.data[0].configuration}}",
-                    "parallel": false,
-                    "condition": ""
-                },
-                "connector": "cyops_utilities",
-                "operation": "make_cyops_request",
-                "operationTitle": "FSR: Make FortiSOAR API Call",
-                "step_variables": {
-                    "IdToName": "{% set data = dict() %}{% for item in vars.steps.Connector_details.data.data[0].configuration %}{% set _ = data.update({item.config_id : item.name}) %}{% endfor %}{{data}}",
-                    "connectorInfo": "{{ vars.result | json_query(\"[*][data][]\") }}"
-                }
-            },
-            "status": null,
-            "top": "300",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
-            "group": null,
-            "uuid": "c1324b91-1924-4146-9fbd-8378ac5142e8"
+        "status": null,
+        "top": "165",
+        "left": "125",
+        "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+        "group": null,
+        "uuid": "b71c5431-482b-4a9a-8917-de6f275e5de6"
+      },
+      {
+        "@type": "WorkflowStep",
+        "name": "Check Connector Health",
+        "description": null,
+        "arguments": {
+          "params": {
+            "iri": "/api/integration/connectors/healthcheck/remote-fortisoar/{{vars.connector_version}}/?config={{vars.item.config_id}}",
+            "body": "",
+            "method": "GET"
+          },
+          "version": "3.2.4",
+          "for_each": {
+            "item": "{{vars.steps.Connector_details.data.data[0].configuration}}",
+            "parallel": false,
+            "condition": ""
+          },
+          "connector": "cyops_utilities",
+          "operation": "make_cyops_request",
+          "operationTitle": "FSR: Make FortiSOAR API Call",
+          "step_variables": {
+            "IdToName": "{% set data = dict() %}{% for item in vars.steps.Connector_details.data.data[0].configuration %}{% set _ = data.update({item.config_id : item.name}) %}{% endfor %}{{data}}",
+            "connectorInfo": "{{ vars.result | json_query(\"[*][data][]\") }}"
+          }
         },
-        {
-            "@type": "WorkflowStep",
-            "name": "Find Master Records",
-            "description": null,
-            "arguments": {
-                "query": {
-                    "sort": [],
-                    "limit": 30,
-                    "logic": "AND",
-                    "filters": [
-                        {
-                            "type": "object",
-                            "field": "siteType",
-                            "value": "\/api\/3\/picklists\/e74fa34e-1032-4c7e-829a-ada155c44ff6",
-                            "_value": {
-                                "@id": "\/api\/3\/picklists\/e74fa34e-1032-4c7e-829a-ada155c44ff6",
-                                "itemValue": "Master"
-                            },
-                            "operator": "eq"
-                        },
-                        {
-                            "type": "primitive",
-                            "field": "siteName",
-                            "value": "{{vars.siteNameList}}",
-                            "operator": "nin",
-                            "_operator": "nin"
-                        }
-                    ]
+        "status": null,
+        "top": "300",
+        "left": "125",
+        "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+        "group": null,
+        "uuid": "c1324b91-1924-4146-9fbd-8378ac5142e8"
+      },
+      {
+        "@type": "WorkflowStep",
+        "name": "Find Master Records",
+        "description": null,
+        "arguments": {
+          "query": {
+            "sort": [],
+            "limit": 30,
+            "logic": "AND",
+            "filters": [
+              {
+                "type": "object",
+                "field": "siteType",
+                "value": "/api/3/picklists/e74fa34e-1032-4c7e-829a-ada155c44ff6",
+                "_value": {
+                  "@id": "/api/3/picklists/e74fa34e-1032-4c7e-829a-ada155c44ff6",
+                  "itemValue": "Master"
                 },
-                "module": "global_visibility_data?$limit=30",
-                "step_variables": {
-                    "recordIri": "{% set data = [] %}\n{% for item in vars.steps.Find_Master_Records %}\n{% set _ = data.append(item[\"uuid\"])%}\n{% endfor %}{{data}}"
-                }
-            },
-            "status": null,
-            "top": "570",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
-            "group": null,
-            "uuid": "e7fe5075-4351-4abd-91a3-276002f22cdc"
-        }
+                "operator": "eq"
+              },
+              {
+                "type": "primitive",
+                "field": "siteName",
+                "value": "{{vars.siteNameList}}",
+                "operator": "nin",
+                "_operator": "nin"
+              }
+            ]
+          },
+          "module": "global_visibility_data?$limit=30",
+          "step_variables": {
+            "recordIri": "{% set data = [] %}\n{% for item in vars.steps.Find_Master_Records %}\n{% set _ = data.append(item[\"uuid\"])%}\n{% endfor %}{{data}}"
+          }
+        },
+        "status": null,
+        "top": "570",
+        "left": "125",
+        "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928770",
+        "group": null,
+        "uuid": "e7fe5075-4351-4abd-91a3-276002f22cdc"
+      }
     ],
     "routes": [
-        {
-            "@type": "WorkflowRoute",
-            "name": "Connector details -> Check Connector Health",
-            "targetStep": "\/api\/3\/workflow_steps\/c1324b91-1924-4146-9fbd-8378ac5142e8",
-            "sourceStep": "\/api\/3\/workflow_steps\/b71c5431-482b-4a9a-8917-de6f275e5de6",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "2f47b42a-d5d3-4b4b-a20e-4b10245a6649"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Start -> Connector details",
-            "targetStep": "\/api\/3\/workflow_steps\/b71c5431-482b-4a9a-8917-de6f275e5de6",
-            "sourceStep": "\/api\/3\/workflow_steps\/44ac665c-5df0-478e-babc-5fefb3183338",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "437291c8-55c9-4370-8af3-dc3d34b90cd7"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Get Available Sites -> Find Master Records",
-            "targetStep": "\/api\/3\/workflow_steps\/e7fe5075-4351-4abd-91a3-276002f22cdc",
-            "sourceStep": "\/api\/3\/workflow_steps\/597471ab-1819-4bb7-9d59-70d25de25c4b",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "8f44bada-0cdc-409d-bcda-e559c5347ea6"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Find Master Records -> Delete Master Records",
-            "targetStep": "\/api\/3\/workflow_steps\/1cda6877-9021-4983-a0d8-3b84e8f7fef3",
-            "sourceStep": "\/api\/3\/workflow_steps\/e7fe5075-4351-4abd-91a3-276002f22cdc",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "b7ae46fb-fedd-4db0-9335-a882daf8ec5f"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Check Connector Health -> Get Available Sites",
-            "targetStep": "\/api\/3\/workflow_steps\/597471ab-1819-4bb7-9d59-70d25de25c4b",
-            "sourceStep": "\/api\/3\/workflow_steps\/c1324b91-1924-4146-9fbd-8378ac5142e8",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "be01ceba-6a9c-4d2b-a278-a7c096fc80a0"
-        }
+      {
+        "@type": "WorkflowRoute",
+        "name": "Connector details -> Check Connector Health",
+        "targetStep": "/api/3/workflow_steps/c1324b91-1924-4146-9fbd-8378ac5142e8",
+        "sourceStep": "/api/3/workflow_steps/b71c5431-482b-4a9a-8917-de6f275e5de6",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "2f47b42a-d5d3-4b4b-a20e-4b10245a6649"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Start -> Connector details",
+        "targetStep": "/api/3/workflow_steps/b71c5431-482b-4a9a-8917-de6f275e5de6",
+        "sourceStep": "/api/3/workflow_steps/44ac665c-5df0-478e-babc-5fefb3183338",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "437291c8-55c9-4370-8af3-dc3d34b90cd7"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Get Available Sites -> Find Master Records",
+        "targetStep": "/api/3/workflow_steps/e7fe5075-4351-4abd-91a3-276002f22cdc",
+        "sourceStep": "/api/3/workflow_steps/597471ab-1819-4bb7-9d59-70d25de25c4b",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "8f44bada-0cdc-409d-bcda-e559c5347ea6"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Find Master Records -> Delete Master Records",
+        "targetStep": "/api/3/workflow_steps/1cda6877-9021-4983-a0d8-3b84e8f7fef3",
+        "sourceStep": "/api/3/workflow_steps/e7fe5075-4351-4abd-91a3-276002f22cdc",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "b7ae46fb-fedd-4db0-9335-a882daf8ec5f"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Check Connector Health -> Get Available Sites",
+        "targetStep": "/api/3/workflow_steps/597471ab-1819-4bb7-9d59-70d25de25c4b",
+        "sourceStep": "/api/3/workflow_steps/c1324b91-1924-4146-9fbd-8378ac5142e8",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "be01ceba-6a9c-4d2b-a278-a7c096fc80a0"
+      }
     ],
     "groups": [],
-    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
     "uuid": "a75d51b8-bcb8-41b6-a0b6-a8edc848794a",
     "owners": [],
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "global_visibility"
+      "global_visibility"
     ]
-}
+  }
