@@ -22,9 +22,14 @@
                                     "editableFields": false,
                                     "actionButtons": [
                                         {
-                                            "id": "\/api\/3\/workflows\/e615f11a-7366-461d-9d57-7afce1ad34d9",
-                                            "name": "Refresh Global Visibility Dashboard",
-                                            "icon": "fa fa-refresh"
+                                            "id": "\/api\/3\/workflows\/6b75c2ae-76b1-4dd7-aef0-baf7f053c579",
+                                            "name": "Create Global Visibility Records",
+                                            "icon": "fa fa-none"
+                                        },
+                                        {
+                                            "id": "\/api\/3\/workflows\/a75d51b8-bcb8-41b6-a0b6-a8edc848794a",
+                                            "name": "Delete Unconfigured Site Records",
+                                            "icon": "fa fa-none"
                                         }
                                     ],
                                     "query": {

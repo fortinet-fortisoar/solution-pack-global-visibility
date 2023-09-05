@@ -1,0 +1,22 @@
+{
+    "@context": "\/api\/3\/contexts\/Role",
+    "@id": "\/api\/3\/roles\/09346f6b-c52e-49c0-9ea5-eb5df2b0fa88",
+    "@type": "Role",
+    "description": "Responsible for Incident Investigation and other remediation and containment-related tasks.",
+    "name": "SOC Manager",
+    "modulePermissions": {
+        "39": {
+            "@id": "\/api\/3\/module_permissions\/2c24e9fd-5f29-44e3-b56f-64e62be8616b",
+            "@type": "ModulePermission",
+            "canCreate": true,
+            "canExecute": true,
+            "canRead": true,
+            "canUpdate": true,
+            "canDelete": true,
+            "fieldPermissions": [],
+            "module": "global_visibility_data",
+            "uuid": "2c24e9fd-5f29-44e3-b56f-64e62be8616b"
+        }
+    },
+    "uuid": "09346f6b-c52e-49c0-9ea5-eb5df2b0fa88"
+}

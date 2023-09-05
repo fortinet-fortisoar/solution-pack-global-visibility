@@ -1,0 +1,25 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "app",
+    "config": {
+        "navigation": [
+            {
+                "title": "Global Visibility Data",
+                "require": {
+                    "module": "global_visibility_data",
+                    "action": "read"
+                },
+                "state": {
+                    "name": "main.modules.list",
+                    "parameters": {
+                        "module": "global_visibility_data"
+                    }
+                },
+                "icon": "fa fa-globe",
+                "editMode": false
+            }
+        ]
+    },
+    "uuid": "navigation"
+}

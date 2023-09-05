@@ -5,7 +5,8 @@
     "description": "Essentially the root user, use carefully",
     "name": "Full App Permissions",
     "modulePermissions": {
-        "43": {
+        "39": {
+            "@id": "\/api\/3\/module_permissions\/161be42c-a68e-40c5-8651-1a4059d2c536",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": true,
@@ -13,7 +14,8 @@
             "canUpdate": true,
             "canDelete": true,
             "fieldPermissions": [],
-            "module": "global_visibility_data"
+            "module": "global_visibility_data",
+            "uuid": "161be42c-a68e-40c5-8651-1a4059d2c536"
         }
     },
     "uuid": "21d7a7c6-9d68-438f-b732-e8950c5f745b"

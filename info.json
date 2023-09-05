@@ -13,14 +13,14 @@
             "minVersion": null
         }
     ],
-    "prerequisite": null,
+    "prerequisite": "Configure the \"remote-fortisoar\" connector using 'Configure' buttom at the bottom of this Solution Pack Card.",
     "publisher": "Community",
     "description": "Global Visibility SP\u00a0contains a dashboard to view data from different sites.",
-    "help": null,
+    "help": "https://github.com/fortinet-fortisoar/solution-pack-global-visibility/blob/release/1.0.0/README.md",
     "category": [
         "Asset Management"
     ],
-    "supportInfo": null,
+    "supportInfo": "support@fortinet.com",
     "iconLarge": null,
     "postInstallConfig": {
         "enabled": true,
@@ -38,7 +38,7 @@
     "recordTags": [
         "global_visibility"
     ],
-    "date": "2023-08-16T05:52:48+00:00",
+    "date": "2023-09-01T12:33:18+00:00",
     "contents": {
         "picklistNames": [
             {
@@ -62,16 +62,27 @@
                 ]
             }
         },
+        "views": {
+            "navigation": [
+                "Global Visibility Data"
+            ]
+        },
         "roles": [
             {
+                "name": "SOC Manager"
+            },
+            {
                 "name": "Full App Permissions"
+            },
+            {
+                "name": "SOC Analyst"
             }
         ],
         "playbooks": [
             {
                 "name": "01 - Global Visibility"
             }
-        ],       
+        ],
         "dashboards": [
             {
                 "name": "Global Visibility"
@@ -89,20 +100,20 @@
                 "name": "Funnel Chart"
             },
             {
-                "apiName": "globalVisibilityConfiguration",
-                "name": "Global Visibility Configuration"
+                "apiName": "recordSummaryCard",
+                "name": "Record Summary Card"
             },
             {
                 "apiName": "topX",
                 "name": "Top X"
             },
             {
-                "apiName": "recordSummaryTile",
-                "name": "Record Summary Tile"
+                "apiName": "globalVisibilityConfiguration",
+                "name": "Global Visibility Configuration"
             },
             {
-                "apiName": "recordSummaryCard",
-                "name": "Record Summary Card"
+                "apiName": "recordSummaryTile",
+                "name": "Record Summary Tile"
             }
         ],
         "recordSets": [
