@@ -80,7 +80,7 @@
         ],
         "playbooks": [
             {
-                "name": "01 - Global Visibility"
+                "name": "10 - SP - Global Visibility"
             }
         ],
         "dashboards": [
