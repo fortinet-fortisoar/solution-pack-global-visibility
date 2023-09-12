@@ -20,13 +20,13 @@
         }
     ],
     "prerequisite": "Configure the \"remote-fortisoar\" connector using 'Configure' buttom at the bottom of this Solution Pack Card.",
-    "publisher": "Community",
+    "publisher": "Fortinet",
     "description": "Global Visibility SP\u00a0contains a dashboard to view data from different sites.",
     "help": "https://github.com/fortinet-fortisoar/solution-pack-global-visibility/blob/release/1.0.0/README.md",
     "category": [
         "FortiSOAR Essentials"
     ],
-    "supportInfo": "support@fortinet.com",
+    "supportInfo": "",
     "iconLarge": null,
     "postInstallConfig": {
         "enabled": true,
