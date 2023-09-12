@@ -144,6 +144,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-      "global_visibility"
+      "global_visibility",
+      "Referenced"
     ]
   }

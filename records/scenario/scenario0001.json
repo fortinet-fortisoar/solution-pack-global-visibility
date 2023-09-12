@@ -1,0 +1,31 @@
+[
+    {
+        "@type": "Scenario",
+        "configuration": "Phishing (1)",
+        "title": "Global Visibility Records",
+        "description": "Creates 4 Global Visibility Records\n - 3 Master records for the 'Record Summary Card' widget, which represents individual site.\n - 1 Global record for the 'Record Summary Tile' widget, which represents count of records across all sites.\n  \n These Records help populate the dashboard with mock data",
+        "steps": {
+            "Steps": [
+                {
+                    "name": "Scenario - Create Global Visibility Records",
+                    "type": "executePlaybook",
+                    "playbookIRI": "\/api\/3\/workflows\/438101e4-2e21-40fe-9a9a-05a82d2e79c6",
+                    "preCreateMessage": "Creating demo record for Global Visibility Dashboard",
+                    "postCreateMessage": "",
+                    "waitTimeforNextStep": "0"
+                }
+            ]
+        },
+        "createdAlertsID": "",
+        "uuid": "829d6c66-5210-4a06-9a17-dbb10d8feb01",
+        "createUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "createDate": 1694413598.378366,
+        "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+        "modifyDate": 1694498196.946046,
+        "id": 2,
+        "recordTags": [
+            "global_visibility",
+            "Scenario"
+        ]
+    }
+]
