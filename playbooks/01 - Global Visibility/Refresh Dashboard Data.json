@@ -160,7 +160,7 @@
       },
       {
         "@type": "WorkflowStep",
-        "name": "Connector Details",
+        "name": "Fetch Connector Configurations",
         "description": null,
         "arguments": {
           "name": "Utilities",
@@ -189,13 +189,13 @@
         "description": null,
         "arguments": {
           "params": {
-            "iri": "/api/integration/connectors/healthcheck/remote-fortisoar/{{vars.steps.Connector_Details.data.data[0].version}}/?config={{vars.item.config_id}}",
+            "iri": "/api/integration/connectors/healthcheck/remote-fortisoar/{{vars.steps.Fetch_Connector_Configurations.data.data[0].version}}/?config={{vars.item.config_id}}",
             "body": "",
             "method": "GET"
           },
           "version": "3.2.4",
           "for_each": {
-            "item": "{{vars.steps.Connector_Details.data.data[0].configuration}}",
+            "item": "{{vars.steps.Fetch_Connector_Configurations.data.data[0].configuration}}",
             "parallel": false,
             "condition": ""
           },
@@ -203,7 +203,7 @@
           "operation": "make_cyops_request",
           "operationTitle": "FSR: Make FortiSOAR API Call",
           "step_variables": {
-            "IdToName": "{% set data = dict() %}{% for item in vars.steps.Connector_Details.data.data[0].configuration %}{% set _ = data.update({item.config_id : item.name}) %}{% endfor %}{{data}}"
+            "IdToName": "{% set data = dict() %}{% for item in vars.steps.Fetch_Connector_Configurations.data.data[0].configuration %}{% set _ = data.update({item.config_id : item.name}) %}{% endfor %}{{data}}"
           }
         },
         "status": null,
