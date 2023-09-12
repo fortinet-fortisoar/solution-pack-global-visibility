@@ -229,44 +229,48 @@
                             {
                                 "type": "funnelChart-1.0.2",
                                 "config": {
-                                    "wid": "a4e753f7-46d8-40ac-8cb2-f37d2742ecc5",
-                                    "eventName": "SiteSelectionChanged",
-                                    "broadcastEvent": true,
-                                    "layers": [
-                                        {
-                                            "value": "funnelChart.alerts",
-                                            "title": "Alerts"
-                                        },
-                                        {
-                                            "value": "funnelChart.incidents",
-                                            "title": "Incidents"
-                                        },
-                                        {
-                                            "value": "funnelChart.warrooms",
-                                            "title": "War Room"
-                                        }
-                                    ],
-                                    "title": "Funnel",
-                                    "funnelModuleType": "Single Module",
-                                    "customModule": "global_visibility_data",
-                                    "query": {
-                                        "sort": [],
-                                        "limit": 30,
-                                        "logic": "AND",
-                                        "filters": [
-                                            {
-                                                "field": "siteName",
-                                                "operator": "eq",
-                                                "_operator": "eq",
-                                                "value": "India",
-                                                "type": "primitive"
-                                            }
-                                        ]
+                                  "wid": "a4e753f7-46d8-40ac-8cb2-f37d2742ecc5",
+                                  "eventName": "SiteSelectionChanged",
+                                  "broadcastEvent": true,
+                                  "layers": [
+                                    {
+                                      "value": "funnelChart.events",
+                                      "title": "Events"
                                     },
-                                    "customModuleField": "dashboardData",
-                                    "moduleType": "Single Module"
+                                    {
+                                      "value": "funnelChart.alerts",
+                                      "title": "Alerts"
+                                    },
+                                    {
+                                      "value": "funnelChart.incidents",
+                                      "title": "Incidents"
+                                    },
+                                    {
+                                      "value": "funnelChart.warrooms",
+                                      "title": "War Room"
+                                    }
+                                  ],
+                                  "title": "Funnel",
+                                  "funnelModuleType": "Single Module",
+                                  "customModule": "global_visibility_data",
+                                  "query": {
+                                    "sort": [],
+                                    "limit": 30,
+                                    "logic": "AND",
+                                    "filters": [
+                                      {
+                                        "field": "siteName",
+                                        "operator": "eq",
+                                        "_operator": "eq",
+                                        "value": "India",
+                                        "type": "primitive"
+                                      }
+                                    ]
+                                  },
+                                  "customModuleField": "dashboardData",
+                                  "moduleType": "Single Module"
                                 }
-                            }
+                              }
                         ],
                         "style": "col-lg-4"
                     },

@@ -1,7 +1,7 @@
 {
     "@type": "Workflow",
     "triggerLimit": null,
-    "name": "Delete Unconfigured Site Records",
+    "name": "Delete Stale Data",
     "aliasName": null,
     "tag": null,
     "description": "This playbook syncs records with the sites configured in Remote FortiSOAR Connector and Deletes records from Global Visibility Module whose respective Site's configuration is either deleted or health check is unavailable.",
@@ -231,6 +231,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-      "global_visibility"
+      "global_visibility",
+      "ManualTrigger"
     ]
   }

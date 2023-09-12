@@ -19,14 +19,14 @@
     "steps": [
       {
         "@type": "WorkflowStep",
-        "name": "Calculate Roi",
+        "name": "Calculate ROI",
         "description": null,
         "arguments": {
           "ROI": "$ {{ '{:,.0f}'.format(vars.steps.Connector_Actions_Executed_for_a_Site.data.actionCount.current | int * vars.dollarValue * vars.avgTimeToExecute / 60 ) }}"
         },
         "status": null,
-        "top": "840",
-        "left": "475",
+        "top": "400",
+        "left": "1420",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "0f5a5d54-5e16-488a-9c50-bf9083c9cdd8"
@@ -55,8 +55,8 @@
           "workflowReference": "/api/3/workflows/23a1143c-a41e-40f3-ac01-34023b347ad5"
         },
         "status": null,
-        "top": "975",
-        "left": "125",
+        "top": "180",
+        "left": "1100",
         "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
         "group": null,
         "uuid": "1afa0ad3-c803-4e6d-a976-238a08df9e63"
@@ -66,14 +66,14 @@
         "name": "Configuration",
         "description": null,
         "arguments": {
-          "moduleList": "[\"alerts\", \"incidents\", \"warrooms\"]",
+          "moduleList": "[\"alerts\", \"incidents\", \"warrooms\", \"events\"]",
           "dollarValue": "60",
           "getMTTRforLast": "30",
           "avgTimeToExecute": "5"
         },
         "status": null,
-        "top": "165",
-        "left": "300",
+        "top": "510",
+        "left": "450",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "3dfc147b-d616-40a8-8158-a2b25539e1b0"
@@ -101,8 +101,8 @@
           "step_variables": []
         },
         "status": null,
-        "top": "1245",
-        "left": "300",
+        "top": "510",
+        "left": "1750",
         "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928770",
         "group": null,
         "uuid": "507faaf9-10da-44f1-a661-069b80f00b2a"
@@ -119,11 +119,39 @@
           }
         },
         "status": null,
-        "top": "30",
-        "left": "300",
+        "top": "510",
+        "left": "125",
         "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
         "group": null,
         "uuid": "5d464431-d509-4b23-866b-6cd18703e136"
+      },
+      {
+        "@type": "WorkflowStep",
+        "name": "Get Open Alerts",
+        "description": null,
+        "arguments": {
+          "name": "Remote FortiSOAR",
+          "config": "{{vars.input.params.siteData.siteName}}",
+          "params": {
+            "iri": "/api/query/alerts",
+            "body": "{\n    \"sort\": [\n        {\n            \"field\": \"priorityWeight\",\n            \"direction\": \"DESC\",\n            \"_fieldName\": \"priorityWeight\"\n        }\n    ],\n    \"limit\": 1,\n    \"logic\": \"AND\",\n    \"filters\": [\n        {\n            \"field\": \"status\",\n            \"operator\": \"eq\",\n            \"value\": \"7de816ff-7140-4ee5-bd05-93ce22002146\",\n            \"_value\": {\n                \"display\": \"Open\",\n                \"itemValue\": \"\",\n                \"@id\": \"/api/3/picklists/7de816ff-7140-4ee5-bd05-93ce22002146\"\n            },\n            \"type\": \"object\"\n        },\n        {\n            \"sort\": [\n                {\n                    \"direction\": \"DESC\",\n                    \"field\": \"priorityWeight\",\n                    \"_fieldTitle\": \"Priority Weight\",\n                    \"_fieldName\": \"priorityWeight\"\n                }\n            ],\n            \"limit\": 1,\n            \"logic\": \"AND\",\n            \"filters\": []\n        }\n    ],\n    \"__selectFields\": [\n        \"id\"\n    ]\n}",
+            "method": "POST",
+            "params": "",
+            "headers": "{\"accept\": \"application/json\"}"
+          },
+          "version": "1.0.0",
+          "connector": "remote-fortisoar",
+          "operation": "make_api_call",
+          "operationTitle": "Make an API call",
+          "pickFromTenant": false,
+          "step_variables": []
+        },
+        "status": null,
+        "top": "640",
+        "left": "1420",
+        "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+        "group": null,
+        "uuid": "6669b221-8e05-46e5-877f-31670aa89887"
       },
       {
         "@type": "WorkflowStep",
@@ -135,8 +163,8 @@
           "tenantIncidents": "{% set result = {} %}{% for item in vars.tenantIncidentData %}{% for key, value in item.items() %}{% set _ = result.update({key: value}) %}{% endfor %}{% endfor %}{{ result }}"
         },
         "status": null,
-        "top": "1110",
-        "left": "125",
+        "top": "180",
+        "left": "1420",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "6ec1b065-4635-478d-84db-942a273e81b3"
@@ -144,7 +172,7 @@
       {
         "@type": "WorkflowStep",
         "name": "Connector Actions Executed for a Site",
-        "description": null,
+        "description": "Get the number of times connector action has been triggered to calculate ROI",
         "arguments": {
           "name": "Remote FortiSOAR",
           "config": "{{vars.input.params.siteData.siteName}}",
@@ -162,8 +190,8 @@
           "step_variables": []
         },
         "status": null,
-        "top": "705",
-        "left": "475",
+        "top": "400",
+        "left": "1100",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "78dac993-51f8-4c07-9d1c-8cfb86ac7cbf"
@@ -177,7 +205,7 @@
           "config": "{{vars.input.params.siteData.siteName}}",
           "params": {
             "iri": "/api/query/incidents",
-            "body": "{\n    \"limit\": 30,\n    \"search\": \"\",\n    \"logic\": \"AND\",\n    \"page\": 1,\n    \"widgetQuery\": null,\n    \"isRelationshipFieldPresent\": false,\n    \"filters\": [\n        {\n            \"field\": \"resolveddate\",\n            \"value\": \"{{arrow.utcnow().shift(days=vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss\")}}\",\n            \"operator\": \"date\",\n            \"type\": \"datetime\",\n            \"OPERATOR_KEY\": \"$\",\n            \"logic\": \"AND\",\n            \"filters\": [\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"gte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().shift(days=-vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss\")}}\"\n                },\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"lte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().format(\"YYYY-MM-DD HH:mm:ss\")}}\"\n                }\n            ]\n        },\n        {\n            \"field\": \"status\",\n            \"value\": \"/api/3/picklists/bb73fd5e-f699-11e7-8c3f-9a214cf093ae\",\n            \"display\": \"Resolved\",\n            \"operator\": \"eq\",\n            \"type\": \"object\",\n            \"OPERATOR_KEY\": \"$\",\n            \"displayTemplate\": \"\"\n        }\n    ],\n    \"sort\": [],\n    \"aggregates\": [\n        {\n            \"alias\": \"value\",\n            \"field\": \"resolveddate,createDate\",\n            \"operator\": \"avg\"\n        }\n    ]\n}",
+            "body": "{\n    \"limit\": 1,\n    \"search\": \"\",\n    \"logic\": \"AND\",\n    \"page\": 1,\n    \"widgetQuery\": null,\n    \"isRelationshipFieldPresent\": false,\n    \"filters\": [\n        {\n            \"field\": \"resolveddate\",\n            \"value\": \"{{arrow.utcnow().shift(days=vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss\")}}\",\n            \"operator\": \"date\",\n            \"type\": \"datetime\",\n            \"OPERATOR_KEY\": \"$\",\n            \"logic\": \"AND\",\n            \"filters\": [\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"gte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().shift(days=-vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss\")}}\"\n                },\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"lte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().format(\"YYYY-MM-DD HH:mm:ss\")}}\"\n                }\n            ]\n        },\n        {\n            \"field\": \"status\",\n            \"value\": \"/api/3/picklists/bb73fd5e-f699-11e7-8c3f-9a214cf093ae\",\n            \"display\": \"Resolved\",\n            \"operator\": \"eq\",\n            \"type\": \"object\",\n            \"OPERATOR_KEY\": \"$\",\n            \"displayTemplate\": \"\"\n        }\n    ],\n    \"sort\": [],\n    \"aggregates\": [\n        {\n            \"alias\": \"value\",\n            \"field\": \"resolveddate,createDate\",\n            \"operator\": \"avg\"\n        }\n    ]\n}",
             "method": "POST",
             "params": "",
             "headers": "{\"accept\": \"application/json\"}"
@@ -192,8 +220,8 @@
           }
         },
         "status": null,
-        "top": "975",
-        "left": "475",
+        "top": "840",
+        "left": "1420",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "7e80e898-658a-4deb-b589-21c99daee66c"
@@ -207,7 +235,7 @@
           "config": "{{vars.input.params.siteData.siteName}}",
           "params": {
             "iri": "/api/query/alerts",
-            "body": "{\n    \"limit\": 30,\n    \"search\": \"\",\n    \"logic\": \"AND\",\n    \"page\": 1,\n    \"widgetQuery\": null,\n    \"isRelationshipFieldPresent\": false,\n    \"filters\": [\n        {\n            \"field\": \"resolveddate\",\n            \"value\": \"{{arrow.utcnow().shift(days=vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}\",\n            \"operator\": \"date\",\n            \"type\": \"datetime\",\n            \"OPERATOR_KEY\": \"$\",\n            \"logic\": \"AND\",\n            \"filters\": [\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"gte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().shift(days=-vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}\"\n                },\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"lte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}\"\n                }\n            ]\n        }\n    ],\n    \"sort\": [],\n    \"aggregates\": [\n        {\n            \"alias\": \"value\",\n            \"field\": \"resolveddate,createDate\",\n            \"operator\": \"avg\"\n        }\n    ]\n}",
+            "body": "{\n    \"limit\": 1,\n    \"search\": \"\",\n    \"logic\": \"AND\",\n    \"page\": 1,\n    \"widgetQuery\": null,\n    \"isRelationshipFieldPresent\": false,\n    \"filters\": [\n        {\n            \"field\": \"resolveddate\",\n            \"value\": \"{{arrow.utcnow().shift(days=vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}\",\n            \"operator\": \"date\",\n            \"type\": \"datetime\",\n            \"OPERATOR_KEY\": \"$\",\n            \"logic\": \"AND\",\n            \"filters\": [\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"gte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().shift(days=-vars.getMTTRforLast).format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}\"\n                },\n                {\n                    \"field\": \"resolveddate\",\n                    \"operator\": \"lte\",\n                    \"type\": \"date\",\n                    \"value\": \"{{arrow.utcnow().format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}\"\n                }\n            ]\n        }\n    ],\n    \"sort\": [],\n    \"aggregates\": [\n        {\n            \"alias\": \"value\",\n            \"field\": \"resolveddate,createDate\",\n            \"operator\": \"avg\"\n        }\n    ]\n}",
             "method": "POST",
             "params": "",
             "headers": "{\"accept\": \"application/json\"}"
@@ -222,8 +250,8 @@
           }
         },
         "status": null,
-        "top": "1110",
-        "left": "475",
+        "top": "300",
+        "left": "1420",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "94b0396f-8564-4adf-bd2a-7fef7f46ca0f"
@@ -249,8 +277,8 @@
           "step_variables": []
         },
         "status": null,
-        "top": "840",
-        "left": "125",
+        "top": "180",
+        "left": "780",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "b6011002-8390-4895-9338-e69dd05c2760"
@@ -264,6 +292,7 @@
             "dashboardData": {
               "funnelChart": {
                 "alerts": "{{vars.alertsCount}}",
+                "events": "{{vars.eventCount}}",
                 "warrooms": "{{vars.warroomsCount}}",
                 "incidents": "{{vars.incidentCount}}"
               },
@@ -273,6 +302,7 @@
                 "data": {
                   "ROI": "{{vars.ROI}}",
                   "Alert MTTR": "{{vars.alertMTTR}}",
+                  "Open Alerts": "{{vars.steps.Get_Open_Alerts.data['hydra:totalItems']}}",
                   "Incident MTTR": "{{vars.incidentMTTR}}",
                   "Total Tenants": "{{vars.totalTenants}}",
                   "Active Incidents": "{{vars.steps.Active_Incidents.data['hydra:totalItems']}}"
@@ -293,8 +323,8 @@
           }
         },
         "status": null,
-        "top": "1380",
-        "left": "300",
+        "top": "510",
+        "left": "2075",
         "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928722",
         "group": null,
         "uuid": "bb506c49-fa25-4250-87d7-7cbaa6c31a39"
@@ -311,8 +341,8 @@
           "warRooms": "{{vars.warroomsCount}}"
         },
         "status": null,
-        "top": "1515",
-        "left": "300",
+        "top": "510",
+        "left": "2400",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "bca368db-03af-4560-862e-c4b8aadd840d"
@@ -343,8 +373,8 @@
           "step_variables": []
         },
         "status": null,
-        "top": "300",
-        "left": "475",
+        "top": "510",
+        "left": "1100",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "cab7efe7-798c-4984-921d-2baac71ab94d"
@@ -358,7 +388,7 @@
           "config": "{{vars.input.params.siteData.siteName}}",
           "params": {
             "iri": "/api/query/incidents",
-            "body": "{\n    \"sort\": [\n        {\n            \"field\": \"modifyDate\",\n            \"direction\": \"DESC\"\n        }\n    ],\n    \"limit\": 30,\n    \"logic\": \"AND\",\n    \"filters\": [\n        {\n            \"field\": \"status\",\n            \"value\": [\n                \"/api/3/picklists/bb73fe9e-f699-11e7-8c3f-9a214cf093ae\"\n            ],\n            \"display\": \"\",\n            \"operator\": \"in\",\n            \"type\": \"array\",\n            \"OPERATOR_KEY\": \"$\"\n        },\n        {\n            \"sort\": [],\n            \"limit\": 30,\n            \"logic\": \"AND\",\n            \"filters\": []\n        }\n    ],\n    \"__selectFields\": [\n        \"id\"\n    ]\n}",
+            "body": "{\n    \"sort\": [\n        {\n            \"field\": \"modifyDate\",\n            \"direction\": \"DESC\"\n        }\n    ],\n    \"limit\": 1,\n    \"logic\": \"AND\",\n    \"filters\": [\n        {\n            \"field\": \"status\",\n            \"value\": [\n                \"/api/3/picklists/bb73fe9e-f699-11e7-8c3f-9a214cf093ae\"\n            ],\n            \"display\": \"\",\n            \"operator\": \"in\",\n            \"type\": \"array\",\n            \"OPERATOR_KEY\": \"$\"\n        },\n        {\n            \"sort\": [],\n            \"limit\": 30,\n            \"logic\": \"AND\",\n            \"filters\": []\n        }\n    ],\n    \"__selectFields\": [\n        \"id\"\n    ]\n}",
             "method": "POST",
             "params": "",
             "headers": "{\"accept\": \"application/json\"}"
@@ -371,8 +401,8 @@
           "step_variables": []
         },
         "status": null,
-        "top": "570",
-        "left": "475",
+        "top": "740",
+        "left": "1420",
         "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
         "group": null,
         "uuid": "db60d493-2b2f-4201-a639-44415959f6ed"
@@ -382,13 +412,14 @@
         "name": "Records Count",
         "description": null,
         "arguments": {
+          "eventCount": "{% for item in vars.steps.Get_Count_of_Records %}{% if \"Event\" in item.data['@context'] %}{{ item.data['hydra:totalItems'] }}{% endif %}{% endfor %}",
           "alertsCount": "{% for item in vars.steps.Get_Count_of_Records %}{% if \"Alert\" in item.data['@context'] %}{{ item.data['hydra:totalItems'] }}{% endif %}{% endfor %}",
           "incidentCount": "{% for item in vars.steps.Get_Count_of_Records %}{% if \"Incident\" in item.data['@context'] %}{{ item.data['hydra:totalItems'] }}{% endif %}{% endfor %}",
           "warroomsCount": "{% for item in vars.steps.Get_Count_of_Records %}{% if \"WarRoom\" in item.data['@context'] %}{{ item.data['hydra:totalItems'] }}{% endif %}{% endfor %}"
         },
         "status": null,
-        "top": "435",
-        "left": "475",
+        "top": "510",
+        "left": "1425",
         "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
         "group": null,
         "uuid": "e381ccb0-6d31-4e65-99f9-7819d38bbb95"
@@ -415,12 +446,30 @@
       },
       {
         "@type": "WorkflowRoute",
-        "name": "Roi -> Incident MTTR",
-        "targetStep": "/api/3/workflow_steps/7e80e898-658a-4deb-b589-21c99daee66c",
-        "sourceStep": "/api/3/workflow_steps/0f5a5d54-5e16-488a-9c50-bf9083c9cdd8",
+        "name": "Configuration -> Active Incidents",
+        "targetStep": "/api/3/workflow_steps/db60d493-2b2f-4201-a639-44415959f6ed",
+        "sourceStep": "/api/3/workflow_steps/3dfc147b-d616-40a8-8158-a2b25539e1b0",
         "label": null,
         "isExecuted": false,
-        "uuid": "71fdf081-3f38-44e0-b9ac-5c3cc8a9a738"
+        "uuid": "5cca253d-fddb-416c-946d-e0fbc4339d75"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Active Incidents -> Find Record to Update",
+        "targetStep": "/api/3/workflow_steps/507faaf9-10da-44f1-a661-069b80f00b2a",
+        "sourceStep": "/api/3/workflow_steps/db60d493-2b2f-4201-a639-44415959f6ed",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "68bb2bde-a8a1-4332-bfc7-f053cee0dd06"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Get Open Alerts -> Find Record to Update",
+        "targetStep": "/api/3/workflow_steps/507faaf9-10da-44f1-a661-069b80f00b2a",
+        "sourceStep": "/api/3/workflow_steps/6669b221-8e05-46e5-877f-31670aa89887",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "6b20ad35-637e-48ff-b9ff-0157862268eb"
       },
       {
         "@type": "WorkflowRoute",
@@ -433,12 +482,30 @@
       },
       {
         "@type": "WorkflowRoute",
+        "name": "Start -> Configuration",
+        "targetStep": "/api/3/workflow_steps/3dfc147b-d616-40a8-8158-a2b25539e1b0",
+        "sourceStep": "/api/3/workflow_steps/5d464431-d509-4b23-866b-6cd18703e136",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "859e211d-ee04-4cf4-a145-f878f0b4dcf4"
+      },
+      {
+        "@type": "WorkflowRoute",
         "name": "Configuration -> Alerts",
         "targetStep": "/api/3/workflow_steps/cab7efe7-798c-4984-921d-2baac71ab94d",
         "sourceStep": "/api/3/workflow_steps/3dfc147b-d616-40a8-8158-a2b25539e1b0",
         "label": null,
         "isExecuted": false,
         "uuid": "86b52f85-c635-40b6-b195-47caabd777aa"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Configuration -> Get Open Alerts",
+        "targetStep": "/api/3/workflow_steps/6669b221-8e05-46e5-877f-31670aa89887",
+        "sourceStep": "/api/3/workflow_steps/3dfc147b-d616-40a8-8158-a2b25539e1b0",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "8792b8d0-5013-4afd-82ea-272ca94d6c05"
       },
       {
         "@type": "WorkflowRoute",
@@ -469,6 +536,15 @@
       },
       {
         "@type": "WorkflowRoute",
+        "name": "Calculate Roi -> Find Record to Update",
+        "targetStep": "/api/3/workflow_steps/507faaf9-10da-44f1-a661-069b80f00b2a",
+        "sourceStep": "/api/3/workflow_steps/0f5a5d54-5e16-488a-9c50-bf9083c9cdd8",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "a1ea7bce-c078-4e09-b4a5-3b1dd411a5fe"
+      },
+      {
+        "@type": "WorkflowRoute",
         "name": "Get Tenants Count -> Tenant",
         "targetStep": "/api/3/workflow_steps/1afa0ad3-c803-4e6d-a976-238a08df9e63",
         "sourceStep": "/api/3/workflow_steps/b6011002-8390-4895-9338-e69dd05c2760",
@@ -478,21 +554,12 @@
       },
       {
         "@type": "WorkflowRoute",
-        "name": "Incident MTTR -> Alerts MTTR",
-        "targetStep": "/api/3/workflow_steps/94b0396f-8564-4adf-bd2a-7fef7f46ca0f",
-        "sourceStep": "/api/3/workflow_steps/7e80e898-658a-4deb-b589-21c99daee66c",
+        "name": "Configuration -> Incident MTTR",
+        "targetStep": "/api/3/workflow_steps/7e80e898-658a-4deb-b589-21c99daee66c",
+        "sourceStep": "/api/3/workflow_steps/3dfc147b-d616-40a8-8158-a2b25539e1b0",
         "label": null,
         "isExecuted": false,
-        "uuid": "b513bd60-972c-409e-8b40-bcb8c30d9cc4"
-      },
-      {
-        "@type": "WorkflowRoute",
-        "name": "Records Count -> Active Incidents",
-        "targetStep": "/api/3/workflow_steps/db60d493-2b2f-4201-a639-44415959f6ed",
-        "sourceStep": "/api/3/workflow_steps/e381ccb0-6d31-4e65-99f9-7819d38bbb95",
-        "label": null,
-        "isExecuted": false,
-        "uuid": "b8b0277c-7ac9-4d72-8372-990fa5cc8a2e"
+        "uuid": "a5998261-059e-4ce9-926c-2ee19efa9347"
       },
       {
         "@type": "WorkflowRoute",
@@ -505,21 +572,30 @@
       },
       {
         "@type": "WorkflowRoute",
-        "name": "Start -> Configuration",
-        "targetStep": "/api/3/workflow_steps/3dfc147b-d616-40a8-8158-a2b25539e1b0",
-        "sourceStep": "/api/3/workflow_steps/5d464431-d509-4b23-866b-6cd18703e136",
+        "name": "Incident MTTR -> Find Record to Update",
+        "targetStep": "/api/3/workflow_steps/507faaf9-10da-44f1-a661-069b80f00b2a",
+        "sourceStep": "/api/3/workflow_steps/7e80e898-658a-4deb-b589-21c99daee66c",
         "label": null,
         "isExecuted": false,
-        "uuid": "c7ce1f99-0403-4df0-825e-9b48f0231440"
+        "uuid": "ccccbeac-5c22-497e-beed-a10da0407523"
       },
       {
         "@type": "WorkflowRoute",
-        "name": "Active Incidents -> Connector Actions Executed for a Site",
-        "targetStep": "/api/3/workflow_steps/78dac993-51f8-4c07-9d1c-8cfb86ac7cbf",
-        "sourceStep": "/api/3/workflow_steps/db60d493-2b2f-4201-a639-44415959f6ed",
+        "name": "Configuration -> Alerts MTTR",
+        "targetStep": "/api/3/workflow_steps/94b0396f-8564-4adf-bd2a-7fef7f46ca0f",
+        "sourceStep": "/api/3/workflow_steps/3dfc147b-d616-40a8-8158-a2b25539e1b0",
         "label": null,
         "isExecuted": false,
-        "uuid": "d98ffe52-babe-4a88-bca5-c504d5496f67"
+        "uuid": "e00e8e12-2807-4f89-912c-cad3d48f2cb0"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Records Count -> Find Record to Update",
+        "targetStep": "/api/3/workflow_steps/507faaf9-10da-44f1-a661-069b80f00b2a",
+        "sourceStep": "/api/3/workflow_steps/e381ccb0-6d31-4e65-99f9-7819d38bbb95",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "f03a8ad6-a587-4825-a56d-2321f6edcaff"
       },
       {
         "@type": "WorkflowRoute",
@@ -529,6 +605,15 @@
         "label": null,
         "isExecuted": false,
         "uuid": "f0794efb-282d-4ebe-80f7-28a582e5a6da"
+      },
+      {
+        "@type": "WorkflowRoute",
+        "name": "Configuration -> Connector Actions Executed for a Site",
+        "targetStep": "/api/3/workflow_steps/78dac993-51f8-4c07-9d1c-8cfb86ac7cbf",
+        "sourceStep": "/api/3/workflow_steps/3dfc147b-d616-40a8-8158-a2b25539e1b0",
+        "label": null,
+        "isExecuted": false,
+        "uuid": "f31fba51-d99a-4aef-9755-2b7533526380"
       }
     ],
     "groups": [],
@@ -538,6 +623,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-      "global_visibility"
+      "global_visibility",
+      "Referenced"
     ]
   }

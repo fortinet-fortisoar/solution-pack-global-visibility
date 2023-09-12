@@ -11,6 +11,12 @@
             "type": "solutionpack",
             "label": "SOAR Framework",
             "minVersion": null
+        },
+        {
+            "name": "socSimulator",
+            "type": "solutionpack",
+            "label": "SOC Simulator",
+            "minVersion": null
         }
     ],
     "prerequisite": "Configure the \"remote-fortisoar\" connector using 'Configure' buttom at the bottom of this Solution Pack Card.",
@@ -18,7 +24,7 @@
     "description": "Global Visibility SP\u00a0contains a dashboard to view data from different sites.",
     "help": "https://github.com/fortinet-fortisoar/solution-pack-global-visibility/blob/release/1.0.0/README.md",
     "category": [
-        "Asset Management"
+        "FortiSOAR Essentials"
     ],
     "supportInfo": "support@fortinet.com",
     "iconLarge": null,
@@ -38,7 +44,7 @@
     "recordTags": [
         "global_visibility"
     ],
-    "date": "2023-09-01T12:33:18+00:00",
+    "date": "2023-09-12T06:10:27+00:00",
     "contents": {
         "picklistNames": [
             {
@@ -80,7 +86,7 @@
         ],
         "playbooks": [
             {
-                "name": "01 - Global Visibility"
+                "name": "10 - SP - Global Visibility"
             }
         ],
         "dashboards": [
@@ -104,22 +110,27 @@
                 "name": "Record Summary Card"
             },
             {
-                "apiName": "topX",
-                "name": "Top X"
-            },
-            {
                 "apiName": "globalVisibilityConfiguration",
                 "name": "Global Visibility Configuration"
             },
             {
                 "apiName": "recordSummaryTile",
                 "name": "Record Summary Tile"
+            },
+            {
+                "apiName": "topX",
+                "name": "Top X"
             }
         ],
         "recordSets": [
             {
                 "name": "Global Visibility Data",
                 "apiName": "global_visibility_data",
+                "count": 1
+            },
+            {
+                "name": "Scenario",
+                "apiName": "scenario",
                 "count": 1
             }
         ]

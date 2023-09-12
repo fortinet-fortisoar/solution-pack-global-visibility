@@ -1,0 +1,141 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Scenario - Create Global Visibility Records",
+    "aliasName": null,
+    "tag": null,
+    "description": "Creates demo records for Global Visibility Dashboard",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/09e854ab-ec45-4705-8eeb-5d498c3bc5cc",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/69df9cef-7085-446e-a4f6-77b38bfc3998",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "69df9cef-7085-446e-a4f6-77b38bfc3998"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "lsitOfRecordIRI": "[]",
+                "globalVisibilityRecords": "{\n  \"result\": [\n    {\n      \"siteType\": \"/api/3/picklists/e74fa34e-1032-4c7e-829a-ada155c44ff6\",\n      \"siteName\": \"Ireland\",\n      \"dashboardData\": {\n        \"funnelChart\": {\n          \"alerts\": 11232,\n          \"events\": 31126,\n          \"warrooms\": 22,\n          \"incidents\": 1220\n        },\n        \"topXbyAlerts\": {\n          \"Accenture\": 1121,\n          \"Paddy Power\": 2331,\n          \"Glen Dimplex\": 3123\n        },\n        \"topXbyIncidents\": {\n          \"Accenture\": 120,\n          \"Paddy Power\": 130,\n          \"Glen Dimplex\": 312\n        },\n        \"recordSummaryCard\": {\n          \"data\": {\n            \"ROI\": \"$ 722,305\",\n            \"Alert MTTR\": \"47:53\",\n            \"Open Alerts\": 1110,\n            \"Incident MTTR\": \"2:07:53\",\n            \"Total Tenants\": 3,\n            \"Active Incidents\": 110\n          },\n          \"title\": \"Ireland\"\n        }\n      }\n    },\n    {\n      \"siteType\": \"/api/3/picklists/e74fa34e-1032-4c7e-829a-ada155c44ff6\",\n      \"siteName\": \"India\",\n      \"dashboardData\": {\n        \"funnelChart\": {\n          \"alerts\": 23503,\n          \"events\": 65310,\n          \"warrooms\": 27,\n          \"incidents\": 12358\n        },\n        \"topXbyAlerts\": {\n          \"HR\": 13269,\n          \"Finance\": 4276,\n          \"Dubai SoC\": 5441\n        },\n        \"topXbyIncidents\": {\n          \"HR\": 1111,\n          \"Finance\": 1236,\n          \"Dubai SoC\": 4224\n        },\n        \"recordSummaryCard\": {\n          \"data\": {\n            \"ROI\": \"$ 800,890\",\n            \"Alert MTTR\": \"45:53\",\n            \"Open Alerts\": 2118,\n            \"Incident MTTR\": \"1:45:53\",\n            \"Total Tenants\": 3,\n            \"Active Incidents\": 241\n          },\n          \"title\": \"India\"\n        }\n      }\n    },\n    {\n      \"siteType\": \"/api/3/picklists/e74fa34e-1032-4c7e-829a-ada155c44ff6\",\n      \"siteName\": \"Australia\",\n      \"dashboardData\": {\n        \"funnelChart\": {\n          \"alerts\": 27126,\n          \"events\": 62110,\n          \"warrooms\": 16,\n          \"incidents\": 4253\n        },\n        \"topXbyAlerts\": {\n          \"Telstra\": 8114,\n          \"ANZ Bank\": 2119,\n          \"Wesfarmers\": 7112,\n          \"National Australia Bank\": 4911\n        },\n        \"topXbyIncidents\": {\n          \"Telstra\": 1211,\n          \"ANZ Bank\": 721,\n          \"Wesfarmers\": 923,\n          \"National Australia Bank\": 120\n        },\n        \"recordSummaryCard\": {\n          \"data\": {\n            \"ROI\": \"$ 211,830\",\n            \"Alert MTTR\": \"26:21\",\n            \"Open Alerts\": 1286,\n            \"Incident MTTR\": \"1:00:33\",\n            \"Total Tenants\": 4,\n            \"Active Incidents\": 812\n          },\n          \"title\": \"Australia\"\n        }\n      }\n    },\n    {\n      \"siteType\": \"/api/3/picklists/363763c9-68a4-4d2c-b282-cc692f59f965\",\n      \"siteName\": \"Global\",\n      \"dashboardData\": {\n        \"recordTilesROI\": {\n          \"title\": \"Overall Automation ROI\",\n          \"value\": \"$ 1,735,025\"\n        },\n        \"recordTilesTotalCount\": {\n          \"data\": {\n            \"Alerts\": 61860,\n            \"Incidents\": 17831,\n            \"War Rooms\": 65\n          },\n          \"title\": \"Total Records\",\n          \"value\": 797967\n        },\n        \"recordTilesCustomerData\": {\n          \"title\": \"Total Tenants\",\n          \"value\": 10\n        }\n      }\n    }\n  ]\n}"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "b5448d30-7054-421a-8265-078baf9601c6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Global Visibility Record",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.globalVisibilityRecords.result}}",
+                    "__bulk": true,
+                    "parallel": false,
+                    "condition": "",
+                    "batch_size": 100
+                },
+                "resource": {
+                    "siteName": "{{vars.item.siteName}}",
+                    "siteType": "{{vars.item.siteType}}",
+                    "__replace": "true",
+                    "dashboardData": "{{vars.item.dashboardData}}"
+                },
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/upsert\/global_visibility_data",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                    "dummy": "{{vars.lsitOfRecordIRI.append(vars.steps.Create_Global_Visibility_Record | json_query('[*][\"@id\"][]'))}}"
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "d18e155d-8e16-4603-859f-81fdacb6aaa8"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Output",
+            "description": null,
+            "arguments": {
+                "@id": "{{vars.lsitOfRecordIRI}}"
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "83cb9ef4-218b-4763-82ec-d2d618154039"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Global Visibility Record -> Output",
+            "targetStep": "\/api\/3\/workflow_steps\/83cb9ef4-218b-4763-82ec-d2d618154039",
+            "sourceStep": "\/api\/3\/workflow_steps\/d18e155d-8e16-4603-859f-81fdacb6aaa8",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "11ac9064-db6b-4cb2-b745-a56d14e456d5"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Create Global Visibility Record",
+            "targetStep": "\/api\/3\/workflow_steps\/d18e155d-8e16-4603-859f-81fdacb6aaa8",
+            "sourceStep": "\/api\/3\/workflow_steps\/b5448d30-7054-421a-8265-078baf9601c6",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "5c6275a4-beaa-4b92-8578-2d356234d596"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/b5448d30-7054-421a-8265-078baf9601c6",
+            "sourceStep": "\/api\/3\/workflow_steps\/69df9cef-7085-446e-a4f6-77b38bfc3998",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "82466a2f-265e-4de5-af6d-1b3df5ab5722"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "438101e4-2e21-40fe-9a9a-05a82d2e79c6",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "global_visibility",
+        "Referenced",
+        "Scenario"
+    ]
+}

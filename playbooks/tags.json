@@ -1,4 +1,7 @@
 [
     "global_visibility",
-    "create_global_visibility_records"
+    "Referenced",
+    "ManualTrigger",
+    "create_global_visibility_records",
+    "Scenario"
 ]
