@@ -12,7 +12,7 @@ This streamlined configuration process ensures seamless access to crucial inform
 
 The **Global Visibility** solution pack is simplifying the task of aggregating site-specific data, providing a comprehensive and centralized view for users, and ultimately empowering the users to make informed choices efficiently.
 
-![global_visibility_dashboard](./res/global-visibility-dashboard-01.png)
+    ![global_visibility_dashboard](./res/global-visibility-dashboard-01.png)
 
 # Next Steps
 | [Installation](./docs/setup.md#installation) | [Configuration](./docs/setup.md#configuration) | [Usage](./docs/usage.md) | [Contents](./docs/contents.md) | 
