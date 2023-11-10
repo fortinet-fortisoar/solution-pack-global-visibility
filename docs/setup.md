@@ -48,6 +48,7 @@ After installation of the **Global Visibility** solution pack, run the configura
     ![Define your Threat Detection Integrations](./res/config-wizard-02.png)
 
 5. Click **Finish** to complete the configuration process.
+   
     ![All set](./res/config-wizard-03.png)
 
 
