@@ -6,8 +6,7 @@
 - **Compatible Version**: 7.3.1 and later 
 
 # Overview 
-The **Global Visibility** solution pack offers a user-friendly dashboard for accessing data from multiple FortiSOAR sites. To enable this, users must set up the Remote FortiSOAR connector for each site, facilitating data retrieval for the dashboard widgets.
-
+The **Global Visibility** solution pack offers a user-friendly dashboard for visualize and accessing data across multiple FortiSOAR instances. 
 This streamlined configuration process ensures seamless access to crucial information across various locations, enhancing overall visibility and decision-making capabilities for any SOC.
 
 The **Global Visibility** solution pack is simplifying the task of aggregating site-specific data, providing a comprehensive and centralized view for users, and ultimately empowering the users to make informed choices efficiently.
