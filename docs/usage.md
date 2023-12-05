@@ -9,6 +9,21 @@ The FortiSOAR Global Visibility Solution Pack provides a comprehensive set of to
 
 This solution pack enables users to monitor alerts, incidents, and other critical data in a centralized dashboard, streamlining security operations and enhancing decision-making.
 
+## Global Visibility Records Scenario
+Refer to [Simulate Scenario documentation](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/usage.md) to understand how to simulate and reset scenarios.
+To understand and visualize the Global Visibility Dashboard, we have included a scenario &mdash; **Global Visibility Records** with this solution pack. 
+
+This scenario generates an example records of type *Global Visibility Data* as mentioned below and these records help populate the dashboard with mock data;
+ - Three Master records for the 'Record Summary Card' widget, which represents individual site.
+ - One Global record for the 'Record Summary Tile' widget, which represents various count of records across all sites.
+
+    ![Global Visibility Scenario](./res/global-visibility-scenario-01.png)
+
+  - Once scenario is executed, mock records will created and it will look like below;
+    
+    ![Global Visibility Scenario](./res/global-visibility-data-01.png)
+ 
+
 ## Dashboard
 This section continues to describe the remaining widgets in the FortiSOAR Global Visibility Solution Pack, along with their functionalities, interactions, and best practices.
 
