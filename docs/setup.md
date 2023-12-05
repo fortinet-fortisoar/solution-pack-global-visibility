@@ -26,7 +26,7 @@ Before installing the FortiSOAR Global Visibility Solution Pack, ensure the foll
 # Configuration
 
 ## Install and Configure Connectors
-For optimal performance of the **Global Visibility** solution pack, install and configure the following connectors:
+Install and configure the following connectors:
 
 - **Remote FortiSOAR** - This connector facilitates automated interactions, with a FortiSOAR endpoint using FortiSOAR™ APIs. To configure and use the Remote FortiSOAR connector, refer to [Configuring Remote FortiSOAR](https://docs.fortinet.com/fortisoar/connectors/remotefsr)
 
