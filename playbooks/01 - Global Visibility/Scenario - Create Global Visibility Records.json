@@ -88,7 +88,7 @@
             "name": "Output",
             "description": null,
             "arguments": {
-                "@id": "{{vars.lsitOfRecordIRI}}"
+                "@id": "{{vars.lsitOfRecordIRI | flatten}}"
             },
             "status": null,
             "top": "435",
