@@ -13,33 +13,42 @@ This solution pack enables users to monitor alerts, incidents, and other critica
 Refer to [Simulate Scenario documentation](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/usage.md) to understand how to simulate and reset scenarios.
 To understand and visualize the Global Visibility Dashboard, we have included a scenario &mdash; **Global Visibility Records** with this solution pack. 
 
+![Global Visibility Scenario](./res/global-visibility-scenario-01.png)
+    
 This scenario generates an example records of type *Global Visibility Data* as mentioned below and these records help populate the dashboard with mock data;
  - Three Master records for the 'Record Summary Card' widget, which represents individual site.
  - One Global record for the 'Record Summary Tile' widget, which represents various count of records across all sites.
 
-    ![Global Visibility Scenario](./res/global-visibility-scenario-01.png)
-
-  - Once scenario is executed, mock records will created and it will look like below;
+Once scenario is executed, mock records will created and it will look like below;
     
-    ![Global Visibility Scenario](./res/global-visibility-data-01.png)
+![Global Visibility Scenario](./res/global-visibility-data-01.png)
  
 
 ## Dashboard
 This section continues to describe the remaining widgets in the FortiSOAR Global Visibility Solution Pack, along with their functionalities, interactions, and best practices.
 
-### Record Summary Card
-As described earlier, the Record Summary Card widget provides an overview of record metrics for each site. Additionally, it has the unique ability to broadcast an event when clicked. This event triggers data updates in other widgets.
+### Global Visibility Dashboard Edit View
+This section describes the edit view of FortiSOAR Global Visibility Dashboard. You can visualize different widgets added and configured in this dashboard.
 
-#### Broadcast Event
-
-When a user clicks on a Record Summary Card representing a site, the widget broadcasts an event containing information about the selected site. This event serves as a trigger for other widgets to adjust their displayed data according to the selected site.
+![Global Visibility Scenario](./res/global-visibility-dashboard-edit-01.png)
 
 ### Record Summary Tile
 The Record Summary Tile widget offers a more detailed breakdown of record metrics for all sites combined. It complements the Record Summary Card by providing a compact visualization of metrics such as Total Alerts, Total Indicators, Total Tenants.
 
+![Global Visibility Scenario](./res/global-visibility-dashboard-widget-01.png)
+
+### Record Summary Card
+As described earlier, the Record Summary Card widget provides an overview of record metrics for each site. Additionally, it has the unique ability to broadcast an event when clicked. This event triggers data updates in other widgets.
+
+![Global Visibility Scenario](./res/global-visibility-dashboard-widget-02.png)
+
+#### Broadcast Event
+When a user clicks on a Record Summary Card representing a site, the widget broadcasts an event containing information about the selected site. This event serves as a trigger for other widgets to adjust their displayed data according to the selected site.
 
 ### Funnel Chart
 The Funnel Chart widget visualizes the progression of records through various stages of the workflow. It's an excellent tool for understanding the efficiency of your incident response process.
+
+![Global Visibility Scenario](./res/global-visibility-dashboard-widget-04.png)
 
 #### Event Listening
 
@@ -48,12 +57,16 @@ The Funnel Chart widget listens for the broadcasted event triggered by the Recor
 ### Top-X
 The Top-X widget identifies the top records based on specific criteria, such as highest priority or most recent. It helps users focus on critical records and analyze trends across sites.
 
+![Global Visibility Scenario](./res/global-visibility-dashboard-widget-03.png)
+
 #### Event Listening
 
 Similar to the Funnel Chart, the Top-X widget also listens for the broadcasted event from the Record Summary Card. When the event is detected, the Top-X widget adjusts its data to reflect the selected site.
 
-### Image Viewer
-The Image Viewer widget allows users to display images or diagrams that are relevant to the selected site. This visual aid can provide contextual information and enhance the decision-making process.
+### Richtext Content
+The Richtext Content widget allows users to display images or diagrams that are relevant to the selected site. This visual aid can provide contextual information and enhance the decision-making process. User can change an image of their choice by modifying `img src` html tag by editing this widget settings.
+
+![Global Visibility Scenario](./res/global-visibility-dashboard-widget-05.png)
 
 ## Event-Driven Interaction
 
