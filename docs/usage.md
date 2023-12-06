@@ -25,7 +25,9 @@ Once scenario is executed, mock records will created and it will look like below
  
 
 ## Dashboard
-This section continues to describe the remaining widgets in the FortiSOAR Global Visibility Solution Pack, along with their functionalities, interactions, and best practices.
+This section continues to describe the dashboard and remaining widgets in the FortiSOAR Global Visibility Solution Pack, along with their functionalities, interactions, and best practices.
+
+![Global Visibility Scenario](./res/global-visibility-dashboard-00.png)
 
 ### Global Visibility Dashboard Edit View
 This section describes the edit view of FortiSOAR Global Visibility Dashboard. You can visualize different widgets added and configured in this dashboard.
@@ -86,6 +88,8 @@ The primary purpose of the *Global Visibility* playbook collection is to gather 
 ## Global Visibility: The Module
 
 The **Global Visibility** module acts as a centralized repository for the aggregated data. It ensures that the widgets have access to a consistent and up-to-date dataset for visualization. The module provides an interface through which widgets can query and retrieve data based on the selected site or other relevant parameters.
+
+![Global Visibility Scenario](./res/global-visibility-module.png)
 
 ## Global Visibility: The Widgets
 
