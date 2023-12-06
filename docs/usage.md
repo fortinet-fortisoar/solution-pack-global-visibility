@@ -85,7 +85,7 @@ The Richtext Content widget allows users to display images or diagrams that are 
 
 The primary purpose of the *Global Visibility* playbook collection is to gather data from individual sites and transform it into a format that is easily consumable by the widgets. By centralizing data within the "Global Visibility" module, the solution pack's widgets can efficiently retrieve and display information, providing users with a unified view of critical metrics and records across sites.
 
-## Global Visibility: The Module
+## Global Visibility Data: The Module
 
 The **Global Visibility** module acts as a centralized repository for the aggregated data. It ensures that the widgets have access to a consistent and up-to-date dataset for visualization. The module provides an interface through which widgets can query and retrieve data based on the selected site or other relevant parameters.
 
@@ -98,6 +98,17 @@ The widgets within the solution pack's dashboard, such as the Record Summary Car
 ## Global Visibility: The Solution Pack
 
 The "Global Visibility" playbook collection plays a pivotal role in the FortiSOAR Global Visibility Solution Pack by aggregating, centralizing, and transforming data from individual sites into a unified dataset. This dataset is harnessed by the solution pack's widgets to provide users with insightful and consolidated visualizations of alerts, incidents, tasks, and other critical metrics across multiple FortiSOAR instances. The "Global Visibility" module acts as the foundation for enhancing decision-making and security operations efficiency.
+
+
+### Delete Stale Data Playbook
+This playbook syncs records with the sites configured in Remote FortiSOAR Connector and deletes records from Global Visibility Data module whose respective Site's configuration is either deleted or health check is unavailable.
+
+![Global Visibility Scenario](./res/global-visibility-data-02.png)
+
+### Refresh Dashboard Data Playbook
+This playbook syncs records with the sites configured in Remote FortiSOAR Connector and creates/updates records for sites based on Remote FortiSOAR connector configured.
+
+![Global Visibility Scenario](./res/global-visibility-pb-01.png)
 
 
 # Next Steps
