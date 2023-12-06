@@ -45,12 +45,13 @@ The **Global Visibility** solution pack contains the following resources.
 | 01 - Global Visibility |
 |:----------------------:|
 
-| Playbook Name                            | Description                                                                                                    |
-|:-----------------------------------------|:---------------------------------------------------------------------------------------------------------------|
-| Create Global Visibility Records         | This playbook creates records for sites based on Remote FortiSOAR connector configured                         |
-| Refresh Global Visibility Dashboard Data | Trigger this playbook to refresh fetch updated data from different sites configured in Remote FortiSOAR Widget |
-| Get Tenant Data                          | Gets data like alerts, indicators, and incidents from Tenant sites                                             |
-| Get Data From Configured Sites           | Get data from all sites configured in remote FortiSOAR connector                                               |
+| Playbook Name                                  | Description                                                                                                    |
+|:-----------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| Scenario - Create Global Visibility Records    | Creates demo records for Global Visibility Dashboard                                                           |
+| Refresh Dashboard Data                         | Trigger this playbook to refresh fetch updated data from different sites configured in Remote FortiSOAR Widget |
+| Get Tenant Data                                | Gets data like alerts, indicators, and incidents from Tenant sites                                             |
+| Get Data From Configured Sites                 | Get data from all sites configured in remote FortiSOAR connector                                               |
+| Delete Stale Data                              | This playbook syncs records with the sites configured in Remote FortiSOAR Connector and Deletes records from Global Visibility Module whose respective Site's configuration is either deleted or health check is unavailable.
 
 <table>
     <tr>
