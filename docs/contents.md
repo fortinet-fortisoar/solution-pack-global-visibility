@@ -42,8 +42,8 @@ The **Global Visibility** solution pack contains the following resources.
 
 ## Playbook Collection
 
-| 01 - Global Visibility |
-|:----------------------:|
+| 10 - SP - Global Visibility |
+|:---------------------------:|
 
 | Playbook Name                                  | Description                                                                                                    |
 |:-----------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
