@@ -201,7 +201,7 @@
     ],
     "system": false,
     "module": "global_visibility_data",
-    "softDeleteable": true,
+    "softDeleteable": false,
     "archivable": false,
     "paused": false,
     "partitionBy": "modifyDate",
